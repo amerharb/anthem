@@ -51,8 +51,26 @@ The visible countries can be set from the URL, for a shareable view:
 
 ## How to contribute
 ### Media files
-To support a new country, one AAC audio file is needed per anthem type:
-`public/sound/instrument/<code>.aac` and `public/sound/tonal/<code>.aac`.
+Each country needs its anthem audio (AAC) under `public/sound/`:
+
+- `tonal/<code>.aac` — the pure-tone melody
+- `introInstrument/<code>.aac` — the **full** recording (intro + instrument in
+  one seamless take); this is the master
+- `intro/<code>.aac` and `instrument/<code>.aac` — the full recording **split**
+  in two: the drum intro, then the rest
+
+For a country whose anthem has a distinct intro, drop the full recording at
+`introInstrument/<code>.aac` and split it with the helper (no guesswork needed):
+
+```
+scripts/split-anthem.sh <code> <intro-seconds>
+# e.g. scripts/split-anthem.sh iq 4.3
+```
+
+It writes `intro/<code>.aac` (the first N seconds) and `instrument/<code>.aac`
+(the rest), in the app's audio format. For a country with **no** distinct intro,
+just provide `instrument/<code>.aac` and `tonal/<code>.aac`; the app plays the
+shared `intro/general.aac` before it in the Intro + Instrument mode.
 
 ### Coding
 Anthem is an open source project built on Vite, React 19, TypeScript v6.x and
