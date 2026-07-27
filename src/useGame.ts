@@ -14,8 +14,8 @@ const randomOf = <T,>(items: T[]): T => items[Math.floor(Math.random() * items.l
 
 type AudioControls = {
 	stopSound: () => void,
-	play: (url: string, code?: string) => void | Promise<void>,
-	schedulePrompt: (url: string, delayMs: number) => void,
+	play: (url: string | string[], code?: string) => void | Promise<void>,
+	schedulePrompt: (url: string | string[], delayMs: number) => void,
 	cancelPrompt: () => void,
 	fx: (name: 'correct' | 'wrong' | 'giveup') => void,
 }
@@ -25,8 +25,8 @@ type UseGameOptions<T> = {
 	canPlay: boolean,
 	// the board for a new round, in the order it should be shown
 	buildBoard: () => T[],
-	// the sound file of an item's prompt
-	promptUrl: (item: T) => string,
+	// the sound file(s) of an item's prompt; an array plays back-to-back as one prompt
+	promptUrl: (item: T) => string | string[],
 	// pre-download the round's prompts so gameplay never waits on the network
 	preload: (urls: string[]) => Promise<void>,
 	audio: AudioControls,
@@ -75,7 +75,10 @@ export function useGame<T extends { code: string }>(
 		audio.stopSound()
 		const items = buildBoard()
 		setPreparing(true)
-		await preload(items.map(promptUrl))
+		await preload(items.flatMap(i => {
+			const u = promptUrl(i)
+			return Array.isArray(u) ? u : [u]
+		}))
 		setPreparing(false)
 		const first = randomOf(items)
 		setBoard(items)

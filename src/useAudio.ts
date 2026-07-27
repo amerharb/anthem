@@ -21,6 +21,9 @@ function playFx(name: 'correct' | 'wrong' | 'giveup') {
 export function useAudio(onPlayed?: () => void) {
 	// the sound currently playing, so starting a new one can stop it first
 	const playingAudio = useRef<HTMLAudioElement | null>(null)
+	// object URLs for the clips of the current (possibly multi-part) playback,
+	// kept so they can all be revoked when playback stops
+	const seqUrls = useRef<string[]>([])
 	// code of the item whose sound is playing, to show the play icon on its button
 	const [playingCode, setPlayingCode] = useState<string | null>(null)
 
@@ -41,10 +44,12 @@ export function useAudio(onPlayed?: () => void) {
 			promptTimer.current = null
 		}
 		if (playingAudio.current) {
+			playingAudio.current.onended = null
 			playingAudio.current.pause()
-			URL.revokeObjectURL(playingAudio.current.src)
 			playingAudio.current = null
 		}
+		seqUrls.current.forEach(u => URL.revokeObjectURL(u))
+		seqUrls.current = []
 		setPlayingCode(null)
 	}, [])
 
@@ -56,26 +61,51 @@ export function useAudio(onPlayed?: () => void) {
 		setMuted(next)
 	}
 
-	// Play a sound, stopping the current one first. With `code` the matching
-	// button shows the play icon; game prompts pass none — a ▶ on the target
-	// button would reveal the answer.
-	const play = useCallback(async (url: string, code?: string) => {
+	// Play a sound, stopping the current one first. A string[] plays the clips
+	// back-to-back as one prompt (e.g. a general drum intro then the anthem) —
+	// all clips are fetched and primed up front so the join has no gap. With
+	// `code` the matching button shows the play icon; game prompts pass none —
+	// a ▶ on the target button would reveal the answer.
+	const play = useCallback(async (url: string | string[], code?: string) => {
 		if (mutedRef.current) return
+		const urls = Array.isArray(url) ? url : [url]
 		try {
-			const blob = await getAudioBlob(url)
-			if (!blob) return
-			const objectUrl = URL.createObjectURL(blob)
+			// fetch every clip's blob first, so the transition never waits on I/O
+			const blobs = await Promise.all(urls.map(getAudioBlob))
+			const objectUrls = blobs.filter(Boolean).map(b => URL.createObjectURL(b as Blob))
+			if (objectUrls.length === 0) return
+			// stop and clean up whatever was playing
 			if (playingAudio.current) {
+				playingAudio.current.onended = null
 				playingAudio.current.pause()
-				URL.revokeObjectURL(playingAudio.current.src)
 			}
-			const audio = new Audio(objectUrl)
-			audio.onended = () => {
-				URL.revokeObjectURL(objectUrl)
-				if (code !== undefined) setPlayingCode(null)
+			seqUrls.current.forEach(u => URL.revokeObjectURL(u))
+			seqUrls.current = objectUrls.slice()
+			// pre-create and load all elements so each next clip starts instantly
+			const elements = objectUrls.map(u => {
+				const a = new Audio(u)
+				a.preload = 'auto'
+				a.load()
+				return a
+			})
+			let idx = 0
+			const step = () => {
+				const a = elements[idx]
+				playingAudio.current = a
+				a.onended = () => {
+					URL.revokeObjectURL(objectUrls[idx])
+					if (idx + 1 < elements.length) {
+						idx += 1
+						step()
+					} else {
+						seqUrls.current = []
+						playingAudio.current = null
+						if (code !== undefined) setPlayingCode(null)
+					}
+				}
+				a.play().catch(() => {})
 			}
-			playingAudio.current = audio
-			await audio.play()
+			step()
 			if (code !== undefined) {
 				setPlayingCode(code)
 				onPlayed?.()
@@ -95,7 +125,7 @@ export function useAudio(onPlayed?: () => void) {
 
 	// play a prompt after a delay (lets the game feedback land first);
 	// cancelled by stopSound or cancelPrompt
-	const schedulePrompt = useCallback((url: string, delayMs: number) => {
+	const schedulePrompt = useCallback((url: string | string[], delayMs: number) => {
 		promptTimer.current = setTimeout(() => play(url), delayMs)
 	}, [play])
 

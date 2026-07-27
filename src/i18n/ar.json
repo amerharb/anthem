@@ -27,6 +27,8 @@
 	"music.title": "نوع النشيد",
 	"music.instrument": "آلي",
 	"music.tonal": "نغمي",
+	"music.intro": "مقدمة",
+	"music.introInstrument": "مقدمة + آلي",
 	"display.group": "عرض البطاقة",
 	"display.flag": "العلم",
 	"display.name": "الاسم",

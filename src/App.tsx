@@ -33,11 +33,30 @@ function shuffle<T>(items: T[]): T[] {
 
 // the two kinds of anthem audio the app can play. This replaces the old
 // "content language" dropdown: the choice is now which rendering you hear.
-export type MusicType = 'instrument' | 'tonal'
+export type MusicType = 'instrument' | 'tonal' | 'intro' | 'introInstrument'
 const MUSIC_TYPES: { type: MusicType, icon: string, key: string }[] = [
 	{ type: 'instrument', icon: '🎺', key: 'music.instrument' },
 	{ type: 'tonal', icon: '🎹', key: 'music.tonal' },
+	{ type: 'intro', icon: '🥁', key: 'music.intro' },
+	{ type: 'introInstrument', icon: '🥁🎺', key: 'music.introInstrument' },
 ]
+
+// the bare 'intro' rendering only exists for countries with their own distinct
+// intro; 'instrument', 'tonal' and 'introInstrument' work for every country —
+// a country without its own intro uses the general drum intro (see filesFor)
+function hasType(c: Country, type: MusicType): boolean {
+	return type !== 'intro' || c.anthem.hasDistinctIntro
+}
+
+// the actual sound file(s) for a country in a given rendering. 'introInstrument'
+// for a country without a distinct intro is the general drum intro played
+// before its instrument anthem — two clips, no pre-joined file needed
+function filesFor(c: Country, type: MusicType): string[] {
+	if (type === 'introInstrument' && !c.anthem.hasDistinctIntro) {
+		return ['/sound/intro/general.aac', `/sound/instrument/${c.code}.aac`]
+	}
+	return [`/sound/${type}/${c.code}.aac`]
+}
 
 function App() {
 	// everything the build supports (after the beta feature flag)
@@ -117,8 +136,10 @@ function App() {
 
 		// flight mode: cache both anthem renderings for every visible country
 		const visible = ALL_COUNTRIES.filter(c => !next.hiddenCountries.includes(c.code))
-		const urlsFor = (countries: typeof visible) =>
-			countries.flatMap(c => MUSIC_TYPES.map(m => `/sound/${m.type}/${c.code}.aac`))
+		const urlsFor = (countries: typeof visible) => Array.from(new Set(
+			countries.flatMap(c => MUSIC_TYPES
+				.filter(m => hasType(c, m.type))
+				.flatMap(m => filesFor(c, m.type)))))
 		if (next.flightMode && !settings.flightMode) {
 			// just switched on: cache everything currently visible
 			cacheAudioUrls(urlsFor(visible))
@@ -138,19 +159,25 @@ function App() {
 	const setDisplayMode = (mode: DisplayMode) => updateSettings({ ...settings, displayMode: mode })
 	const setUiLanguage = (code: string) => updateSettings({ ...settings, uiLanguage: code as Language })
 
-	// the visible countries, in a stable order (by code); hidden ones are dropped
+	// the visible countries, in a stable order (by code); hidden ones are dropped.
+	// All visible countries stay on the board — those without the selected anthem
+	// type are shown disabled rather than removed.
 	const COUNTRIES = ALL_COUNTRIES
 		.filter(c => !settings.hiddenCountries.includes(c.code))
 		.sort((a, b) => a.code.localeCompare(b.code))
+	// only countries that actually have the selected rendering can be played/guessed
+	const PLAYABLE = COUNTRIES.filter(c => hasType(c, musicType))
 
-	// the anthem sound file of a country in the selected rendering
-	const anthemUrl = (code: string) => `/sound/${musicType}/${code}.aac`
+	// the anthem sound file(s) of a country in the selected rendering (an array
+	// when it's a general-intro-then-instrument sequence)
+	const anthemUrls = (c: Country) => filesFor(c, musicType)
 
 	// the game: recognise the country from its anthem — the cards shuffle each round
+	// (only the countries that have the selected rendering take part)
 	const game = useGame<Country>({
-		canPlay: COUNTRIES.length > 0,
-		buildBoard: () => shuffle(COUNTRIES),
-		promptUrl: c => anthemUrl(c.code),
+		canPlay: PLAYABLE.length > 0,
+		buildBoard: () => shuffle(PLAYABLE),
+		promptUrl: c => anthemUrls(c),
 		preload: async urls => {
 			await ensureCached(urls)
 			refreshCacheCount()
@@ -269,6 +296,9 @@ function App() {
 					const isGivenUp = game.gameOn && game.gaveUpCodes.includes(c.code)
 					const isSolved = game.gameOn && game.solved.includes(c.code) && !isGivenUp
 					const isWrong = game.gameOn && game.wrongGuesses.includes(c.code)
+					// this country has no audio for the selected anthem type: show it,
+					// but disabled (not hidden)
+					const unavailable = !hasType(c, musicType)
 					return (
 						<button
 							key={`country-${c.code}`}
@@ -277,14 +307,14 @@ function App() {
 								+ (audio.playingCode === c.code ? ' playing' : '')
 								+ (isWrong ? ' wrong' : '')}
 							title={game.gameOn ? '' : c.name[settings.uiLanguage]}
-							disabled={isSolved || isGivenUp || isWrong}
+							disabled={isSolved || isGivenUp || isWrong || unavailable}
 							onClick={() => {
 								if (game.gameOn) {
 									game.guess(c.code)
 								} else if (audio.playingCode === c.code) {
 									audio.stopSound()
 								} else {
-									audio.play(anthemUrl(c.code), c.code)
+									audio.play(anthemUrls(c), c.code)
 									setShownName(c.name[settings.uiLanguage])
 								}
 							}}

@@ -27,6 +27,8 @@
 	"music.title": "Anthem type",
 	"music.instrument": "Instrument",
 	"music.tonal": "Tonal",
+	"music.intro": "Intro",
+	"music.introInstrument": "Intro + Instrument",
 	"display.group": "Card shows",
 	"display.flag": "Flag",
 	"display.name": "Name",
