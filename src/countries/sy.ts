@@ -7,4 +7,15 @@ export const sy: Country = {
 		ar: 'سوريا',
 	},
 	flag: '🇸🇾',
+	nativeLanguage: 'ar',
+	anthem: {
+		nativeName: 'حماة الديار',
+		name: {
+			en: 'Guardians of the Homeland',
+			ar: 'حماة الديار',
+		},
+		hasDistinctIntro: false,
+		composed: '1936',
+		adopted: '1938',
+	},
 }
