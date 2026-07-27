@@ -20,6 +20,7 @@ import { useFitText } from './useFitText'
 import { translator, UI_LANGUAGES } from './i18n'
 import { sy } from './countries/sy'
 import { iq } from './countries/iq'
+import { lb } from './countries/lb'
 
 // Fisher–Yates shuffle into a new array (used to scramble the card positions on game start)
 function shuffle<T>(items: T[]): T[] {
@@ -60,7 +61,7 @@ function filesFor(c: Country, type: MusicType): string[] {
 
 function App() {
 	// everything the build supports (after the beta feature flag)
-	const ALL_COUNTRIES: Country[] = [sy, iq].filter(isVisible)
+	const ALL_COUNTRIES: Country[] = [sy, iq, lb].filter(isVisible)
 
 	// true while flight-mode downloads are in progress, to show it on the toggle
 	const [caching, setCaching] = useState(false)
