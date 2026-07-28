@@ -34,19 +34,23 @@ function shuffle<T>(items: T[]): T[] {
 
 // the two kinds of anthem audio the app can play. This replaces the old
 // "content language" dropdown: the choice is now which rendering you hear.
-export type MusicType = 'instrument' | 'tonal' | 'intro' | 'introInstrument'
+export type MusicType = 'instrument' | 'vocal' | 'tonal' | 'intro' | 'introInstrument'
 const MUSIC_TYPES: { type: MusicType, icon: string, key: string }[] = [
 	{ type: 'instrument', icon: '🎺', key: 'music.instrument' },
+	{ type: 'vocal', icon: '🎤', key: 'music.vocal' },
 	{ type: 'tonal', icon: '🎹', key: 'music.tonal' },
 	{ type: 'intro', icon: '🥁', key: 'music.intro' },
 	{ type: 'introInstrument', icon: '🥁🎺', key: 'music.introInstrument' },
 ]
 
-// the bare 'intro' rendering only exists for countries with their own distinct
-// intro; 'instrument', 'tonal' and 'introInstrument' work for every country —
-// a country without its own intro uses the general drum intro (see filesFor)
+// availability by rendering: 'intro' needs the country's own distinct intro,
+// 'vocal' needs a sung recording; 'instrument', 'tonal' and 'introInstrument'
+// work for every country (a country without its own intro uses the general
+// drum intro before its instrument — see filesFor)
 function hasType(c: Country, type: MusicType): boolean {
-	return type !== 'intro' || c.anthem.hasDistinctIntro
+	if (type === 'intro') return c.anthem.hasDistinctIntro
+	if (type === 'vocal') return !!c.anthem.hasVocal
+	return true
 }
 
 // the actual sound file(s) for a country in a given rendering. 'introInstrument'

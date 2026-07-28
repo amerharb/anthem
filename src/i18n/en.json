@@ -26,6 +26,7 @@
 	"uiLanguage": "Interface language",
 	"music.title": "Anthem type",
 	"music.instrument": "Instrument",
+	"music.vocal": "Vocal",
 	"music.tonal": "Tonal",
 	"music.intro": "Intro",
 	"music.introInstrument": "Intro + Instrument",
