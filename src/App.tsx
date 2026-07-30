@@ -324,7 +324,7 @@ function App() {
 								}
 							}}
 						>
-							<span className="card-face">{cardFace(c)}</span>
+							<span className={'card-face' + (settings.displayMode === 'flag' ? ' flag-emoji' : '')}>{cardFace(c)}</span>
 							{audio.playingCode === c.code && <span className="play-icon">▶</span>}
 							{isSolved && <span className="swatch-mark">👍</span>}
 							{isGivenUp && <span className="swatch-mark">🤷‍♂️</span>}
