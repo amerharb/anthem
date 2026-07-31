@@ -15,6 +15,22 @@ export const us: Country = {
 			ar: 'الراية المرصعة بالنجوم',
 		},
 		hasTonal: true,
+		score: {
+			tempo: 102,
+			melody:
+				'F4/0.5 D4/0.5 Bb3/1 D4/1 F4/1 Bb4/2 D5/0.5 C5/0.5 ' +
+				'Bb4/1 D4/1 E4/1 F4/2 F4/1 D5/1 C5/1 Bb4/1 ' +
+				'A4/2 G4/0.5 A4/0.5 Bb4/1 Bb4/1 F4/1 D4/1 Bb3/1 ' +
+				'F4/0.5 D4/0.5 Bb3/1 D4/1 F4/1 Bb4/2 D5/0.5 C5/0.5 ' +
+				'Bb4/1 D4/1 E4/1 F4/2 F4/1 D5/1 C5/1 Bb4/1 ' +
+				'A4/2 G4/0.5 A4/0.5 Bb4/1 Bb4/1 F4/1 D4/1 Bb3/1 ' +
+				'D5/2 Eb5/1 F5/1 F5/2 Eb5/0.5 D5/0.5 C5/1 D5/1 ' +
+				'Eb5/1 Eb5/2 Eb5/1 D5/1 C5/1 Bb4/1 A4/2 G4/0.5 ' +
+				'A4/0.5 Bb4/1 D4/1 E4/1 F4/2 F4/1 Bb4/1 Bb4/1 ' +
+				'Bb4/0.5 A4/0.5 G4/1 G4/1 G4/1 C5/1 Eb5/0.5 D5/0.5 ' +
+				'C5/0.5 Bb4/1.5 A4/1.5 F4/1 Bb4/1.5 C5/0.5 D5/0.5 Eb5/0.5 ' +
+				'F5/3 Bb4/0.5 C5/0.5 D5/1.5 Eb5/0.5 C5/1 Bb4/1 r/0.5',
+		},
 		// the tune (To Anacreon in Heaven) is older, c. 1773; 1814 is when Francis
 		// Scott Key's words were set to it and the song as we know it appeared
 		composed: '1814',
