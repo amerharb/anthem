@@ -15,7 +15,6 @@ export const lb: Country = {
 			ar: 'كلنا للوطن',
 		},
 		intro: 17,
-		hasTonal: true,
 		composed: '1925',
 		adopted: '1927-07-12',
 	},

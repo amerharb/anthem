@@ -14,7 +14,6 @@ export const us: Country = {
 			en: 'The Star-Spangled Banner',
 			ar: 'الراية المرصعة بالنجوم',
 		},
-		hasTonal: true,
 		score: {
 			// Bb major, 3/4, quarter = 100; melody is the top voice of the
 			// public-domain piano MIDI on Wikimedia Commons

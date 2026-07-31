@@ -2,7 +2,8 @@
 # Anthem
 
 Small React project to play national anthems and guess the country. Pick an
-anthem type (🎺 instrument or 🎹 tonal), then listen and recognise the country.
+anthem type (🎺 instrument, 🥁 intro, or the melody played live from notes), then
+listen and recognise the country.
 Sister project of [Flags](https://github.com/amerharb/flags),
 [Colors](https://github.com/amerharb/colors),
 [Week](https://github.com/amerharb/week) and
@@ -14,17 +15,20 @@ Sister project of [Flags](https://github.com/amerharb/flags),
 - Lebanon 🇱🇧
 - Oman 🇴🇲
 - Syria 🇸🇾
+- United States of America 🇺🇸
 - More to come, see How to contribute
 
 ## Anthem types
 - 🎺 **Instrument** — the instrumental anthem (after the intro, when there is one)
 - 🎤 **Vocal** — the anthem sung in the country's native language
-- 🎹 **Tonal** — a pure-tone rendering of the melody's main notes
+- 🎼 **Notes (live)** — the melody synthesized in the browser from stored notes,
+  a few hundred bytes of text instead of a recording
 - 🥁 **Intro** — just the anthem's opening intro
 - 🥁🎺 **Intro + Instrument** — the intro straight into the anthem
 
-🥁 and 🥁🎺 only apply to anthems that have a distinct intro, and 🎤 only where a
-sung recording exists; a country without the selected type is shown disabled.
+🥁 only applies to anthems that have a distinct intro, 🎤 to countries with a sung
+recording, and 🎼 to those whose melody has been written out; a country without
+the selected type is shown disabled rather than hidden.
 
 ## Interface languages
 - English
@@ -67,7 +71,6 @@ Audio lives under `public/sound/` as AAC, one file per recording:
   nothing to split or trim: just set `anthem.intro` (seconds) in the country file
   and the app plays 0 → intro, intro → end, or the whole thing
 - `vocal/<code>.aac` — the sung version (only for countries with `hasVocal: true`)
-- `tonal/<code>.aac` — the pure-tone melody
 
 ### Coding
 Anthem is an open source project built on Vite, React 19, TypeScript v6.x and
@@ -79,8 +82,8 @@ To add a country:
 2. If its anthem has a distinct intro, set `anthem.intro` to the second it ends
    (e.g. `intro: 4.3`); leave it out when there is none.
 3. Import it and add it to the `ALL_COUNTRIES` array in `src/App.tsx`.
-4. Drop the audio at `public/sound/anthem/<code>.aac` (plus `tonal/` and
-   `vocal/` if available).
+4. Drop the audio at `public/sound/anthem/<code>.aac` (plus `vocal/<code>.aac`
+   if a sung recording is available).
 
 #### Setup environment
 - Node 20.19 or above
@@ -98,5 +101,5 @@ Vercel integration tool with GitHub.
 ### For sound
 - National anthem recordings: [Wikimedia Commons](https://commons.wikimedia.org/)
   public-domain uploads, including performances by the United States Navy Band
-- 🎹 pure-tone anthems: synthesized as sine tones from the melody (top voice) of
-  public-domain MIDI transcriptions
+- 🎼 live melodies: transcribed to notes from public-domain or freely available
+  MIDI and published scores — see `midi/README.md` for the per-country sources

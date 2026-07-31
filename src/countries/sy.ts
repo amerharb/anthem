@@ -14,7 +14,6 @@ export const sy: Country = {
 			en: 'Guardians of the Homeland',
 			ar: 'حماة الديار',
 		},
-		hasTonal: true,
 		score: {
 			// A major, 4/4, quarter = 100 per the published score (Mohammad and
 			// Ahmad Salim Flayfel); melody taken from the MIDI's MELODY track

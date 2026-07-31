@@ -5,13 +5,13 @@
 ## [0.16.0] 2026-07-30
 ### Added
 - Initial release, split out from the Flags project: an app focused on national
-  anthems only. Countries: United Arab Emirates 🇦🇪, Iraq 🇮🇶, Lebanon 🇱🇧 and
-  Syria 🇸🇾
+  anthems only. Countries: United Arab Emirates 🇦🇪, Iraq 🇮🇶, Lebanon 🇱🇧, Oman
+  🇴🇲, Syria 🇸🇾 and the United States 🇺🇸
 - Choose the anthem type from the toolbar dropdown — 🎺 Instrument (recorded
-  performance), 🎤 Vocal (sung in the country's native language), 🎹 Tonal
-  (pure-tone melody), 🥁 Intro (the anthem's own drum/instrumental intro) and
-  🥁🎺 Intro + Instrument (both, back to back). This replaces the old `xa`/`xt`
-  pseudo-language codes from Flags
+  performance), 🎤 Vocal (sung in the country's native language), 🎼 Notes (the
+  melody synthesized live in the browser from stored notes), 🥁 Intro (the
+  anthem's own drum/instrumental intro) and 🥁🎺 Intro + Instrument (both, back to
+  back). This replaces the old `xa`/`xt` pseudo-language codes from Flags
 - A country that lacks the selected type is shown **disabled** rather than
   hidden, so the board stays stable while switching types. Availability comes
   from the country data (`anthem.intro`, `anthem.hasVocal`)

@@ -15,7 +15,6 @@ export const iq: Country = {
 			ar: 'موطني',
 		},
 		intro: 4.3,
-		hasTonal: true,
 		composed: '1934',
 		adopted: '2004',
 	},

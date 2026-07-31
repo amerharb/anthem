@@ -17,8 +17,6 @@ export type Country = {
 			intro?: number,
 			// true when a sung (vocal, native-language) recording is available
 			hasVocal?: boolean,
-			// true when a pure-tone (tonal) rendering is available
-			hasTonal?: boolean,
 			// the melody as notes, synthesized live in the browser instead of
 			// streaming a recording (see src/synth.ts for the format)
 			score?: { tempo: number, melody: string },
