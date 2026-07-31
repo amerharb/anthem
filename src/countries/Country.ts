@@ -17,6 +17,8 @@ export type Country = {
 			intro?: number,
 			// true when a sung (vocal, native-language) recording is available
 			hasVocal?: boolean,
+			// true when a pure-tone (tonal) rendering is available
+			hasTonal?: boolean,
 			composed?: string, // ISO date 'yyyy-mm-dd', 'yyyy-mm' or 'yyyy'
 			adopted?: string, // ISO date 'yyyy-mm-dd', 'yyyy-mm' or 'yyyy' some countries have no adoption day
 		},

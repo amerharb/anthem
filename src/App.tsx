@@ -45,12 +45,14 @@ const MUSIC_TYPES: { type: MusicType, icon: string, key: string }[] = [
 	{ type: 'introInstrument', icon: '🥁🎺', key: 'music.introInstrument' },
 ]
 
-// availability by rendering: 🥁 intro and 🥁🎺 intro+instrument need the anthem
-// to have a distinct intro (`anthem.intro` seconds), 🎤 vocal needs a sung
-// recording; 🎺 instrument and 🎹 tonal work for every country
+// availability by rendering: 🥁 intro needs the anthem to actually have one
+// (`anthem.intro` seconds), 🎤 vocal and 🎹 tonal need their own recording.
+// 🎺 instrument and 🥁🎺 intro+instrument always work — with no intro the window
+// simply starts at 0, so 🥁🎺 is the whole recording either way.
 function hasType(c: Country, type: MusicType): boolean {
-	if (type === 'intro' || type === 'introInstrument') return !!c.anthem.intro
+	if (type === 'intro') return !!c.anthem.intro
 	if (type === 'vocal') return !!c.anthem.hasVocal
+	if (type === 'tonal') return !!c.anthem.hasTonal
 	return true
 }
 

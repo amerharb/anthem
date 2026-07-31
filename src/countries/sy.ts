@@ -14,6 +14,7 @@ export const sy: Country = {
 			en: 'Guardians of the Homeland',
 			ar: 'حماة الديار',
 		},
+		hasTonal: true,
 		composed: '1936',
 		adopted: '1938',
 	},
