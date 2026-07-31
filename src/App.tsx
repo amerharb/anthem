@@ -23,6 +23,7 @@ import { iq } from './countries/iq'
 import { lb } from './countries/lb'
 import { ae } from './countries/ae'
 import { om } from './countries/om'
+import { us } from './countries/us'
 
 // Fisher–Yates shuffle into a new array (used to scramble the card positions on game start)
 function shuffle<T>(items: T[]): T[] {
@@ -74,7 +75,7 @@ function clipFor(c: Country, type: MusicType): Clip {
 
 function App() {
 	// everything the build supports (after the beta feature flag)
-	const ALL_COUNTRIES: Country[] = [sy, iq, lb, ae, om].filter(isVisible)
+	const ALL_COUNTRIES: Country[] = [sy, iq, lb, ae, om, us].filter(isVisible)
 
 	// true while flight-mode downloads are in progress, to show it on the toggle
 	const [caching, setCaching] = useState(false)
