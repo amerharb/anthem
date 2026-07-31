@@ -2,11 +2,16 @@
 // display name (shown on a card when the display mode is "name").
 export type Language = 'en' | 'ar'
 
+// The language the anthem itself is sung in (ISO 639-1). Separate from the
+// interface languages above — most anthems are in neither of them. Add a code
+// here as countries are added.
+export type NativeLanguage = 'ar' | 'en' | 'el' | 'sv' | 'th' | 'tr'
+
 export type Country = {
     code: string,
     name: Record<Language, string>,
     flag: string,
-		nativeLanguage: Language,
+		nativeLanguage: NativeLanguage,
     anthem: {
 			nativeName: string,
 			name: Record<Language, string>,

@@ -5,8 +5,9 @@
 ## [0.16.0] 2026-07-30
 ### Added
 - Initial release, split out from the Flags project: an app focused on national
-  anthems only. Countries: United Arab Emirates 🇦🇪, Iraq 🇮🇶, Lebanon 🇱🇧, Oman
-  🇴🇲, Syria 🇸🇾 and the United States 🇺🇸
+  anthems only. Countries: United Arab Emirates 🇦🇪, Greece 🇬🇷, Iraq 🇮🇶,
+  Lebanon 🇱🇧, Oman 🇴🇲, Sweden 🇸🇪, Syria 🇸🇾, Thailand 🇹🇭, Turkey 🇹🇷 and the
+  United States 🇺🇸
 - Choose the anthem type from the toolbar dropdown — 🎺 Instrument (recorded
   performance), 🎤 Vocal (sung in the country's native language), 🎼 Notes (the
   melody synthesized live in the browser from stored notes), 🥁 Intro (the

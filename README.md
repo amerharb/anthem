@@ -10,11 +10,15 @@ Sister project of [Flags](https://github.com/amerharb/flags),
 [Arqaam](https://github.com/amerharb/arqaam).
 
 ## Countries supported
-- United Arab Emirates 🇦🇪
+- Greece 🇬🇷
 - Iraq 🇮🇶
 - Lebanon 🇱🇧
 - Oman 🇴🇲
+- Sweden 🇸🇪
 - Syria 🇸🇾
+- Thailand 🇹🇭
+- Turkey 🇹🇷
+- United Arab Emirates 🇦🇪
 - United States of America 🇺🇸
 - More to come, see How to contribute
 

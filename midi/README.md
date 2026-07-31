@@ -15,8 +15,12 @@ where it came from.
 | `lb.midi` | كلنا للوطن | BitMidi `/uploads/79438.mid` | `MELODY` track; anthem unchanged since 1927 |
 | `ae.midi` | عيشي بلادي | BitMidi `/uploads/79487.mid` | `MELODY` track; anthem music unchanged since 1971 |
 | `om.midi` | السلام السلطاني | BitMidi `/uploads/79452.mid` | `MELODY` track; **predates Oman's 1996 revision** — verify before trusting |
+| `th.midi` | เพลงชาติไทย | BitMidi `/uploads/79481.mid` | `MELODY` track; anthem unchanged since 1939 |
+| `tr.midi` | İstiklal Marşı | BitMidi `/uploads/79483.mid` | `MELODY` track; anthem dates from 1921 |
+| `gr.midi` | Ύμνος εις την Ελευθερίαν | BitMidi `/uploads/79430.mid` | `MELODY` track, transposed down an octave (source is in the piccolo register) |
+| `se.midi` | Du gamla, du fria | BitMidi `/uploads/79476.mid` | no `MELODY` track — the melody is the monophonic `trumpet(s)` line |
 
-All four Arabic-anthem files above come from the same Software Toolworks *World
+All the BitMidi files above come from the same Software Toolworks *World
 Atlas* (1991) collection. Always check what the anthem **was in 1991** before
 transcribing from it — that is exactly how Iraq's file turned out to be the wrong
 anthem (see below).
@@ -41,7 +45,7 @@ Do not transcribe from a pure-tone rendering: the ones this project started with
 
 `us.midi` is public domain (Wikimedia Commons) and is committed here.
 
-`sy.midi`, `lb.midi`, `ae.midi` and `om.midi` are **not committed** — they are
+Every other file here (`sy` `lb` `ae` `om` `th` `tr` `gr` `se`) is **not committed** — they are
 listed in `.gitignore`. They carry "(p) (c) The Software Toolworks 1991" in their
 metadata, so they are someone else's copyrighted arrangements; redistributing
 them from a public repo is not ours to do. They stay on disk locally for
@@ -50,7 +54,7 @@ only the melodies transcribed from them, in `src/countries/*.ts`.
 
 Note that the underlying compositions are a separate question from the MIDI
 files: several anthem melodies here are 20th-century works still in copyright in
-many countries (Syria's and Iraq's are both by Mohammed Flayfel, d. 1985). They
+many countries (Syria's and Iraq's are both by Mohammed Flayfel, d. 1986). They
 are used here for education, credited, and can be removed on request.
 
 ## Not yet sourced
