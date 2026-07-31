@@ -12,10 +12,17 @@ import { useEffect, useRef, useState } from 'react'
 
 const randomOf = <T,>(items: T[]): T => items[Math.floor(Math.random() * items.length)]
 
+// a prompt is a url, a url with a start/end window into a longer recording, or a
+// score played live by the synthesizer (nothing to download)
+type Clip =
+	| string
+	| { url: string, start?: number, end?: number }
+	| { score: { tempo: number, melody: string } }
+
 type AudioControls = {
 	stopSound: () => void,
-	play: (url: string, code?: string) => void | Promise<void>,
-	schedulePrompt: (url: string, delayMs: number) => void,
+	play: (clip: Clip, code?: string) => void | Promise<void>,
+	schedulePrompt: (clip: Clip, delayMs: number) => void,
 	cancelPrompt: () => void,
 	fx: (name: 'correct' | 'wrong' | 'giveup') => void,
 }
@@ -25,8 +32,8 @@ type UseGameOptions<T> = {
 	canPlay: boolean,
 	// the board for a new round, in the order it should be shown
 	buildBoard: () => T[],
-	// the sound file of an item's prompt
-	promptUrl: (item: T) => string,
+	// an item's prompt: a sound file, or a window into one
+	promptUrl: (item: T) => Clip,
 	// pre-download the round's prompts so gameplay never waits on the network
 	preload: (urls: string[]) => Promise<void>,
 	audio: AudioControls,
@@ -75,7 +82,13 @@ export function useGame<T extends { code: string }>(
 		audio.stopSound()
 		const items = buildBoard()
 		setPreparing(true)
-		await preload(items.map(promptUrl))
+		// several prompts can be windows into the same file, so de-duplicate;
+		// synthesized scores have no file to fetch
+		await preload([...new Set(items.flatMap(i => {
+			const p = promptUrl(i)
+			if (typeof p === 'string') return [p]
+			return 'url' in p ? [p.url] : []
+		}))])
 		setPreparing(false)
 		const first = randomOf(items)
 		setBoard(items)
