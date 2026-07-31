@@ -28,6 +28,7 @@
 	"music.instrument": "Instrument",
 	"music.vocal": "Vocal",
 	"music.tonal": "Tonal",
+	"music.notes": "Notes (live)",
 	"music.intro": "Intro",
 	"music.introInstrument": "Intro + Instrument",
 	"display.group": "Card shows",

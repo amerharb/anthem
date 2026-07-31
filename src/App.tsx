@@ -39,32 +39,37 @@ function shuffle<T>(items: T[]): T[] {
 // language" dropdown: the choice is now which rendering you hear.
 // 🎤 vocal and 🎹 tonal are beta: their recordings are still being worked on, so
 // they show while developing but are hidden from the production build.
-export type MusicType = 'instrument' | 'vocal' | 'tonal' | 'intro' | 'introInstrument'
+export type MusicType = 'instrument' | 'vocal' | 'tonal' | 'notes' | 'intro' | 'introInstrument'
 const MUSIC_TYPE_DEFS: { type: MusicType, icon: string, key: string, beta?: boolean }[] = [
 	{ type: 'instrument', icon: '🎺', key: 'music.instrument' },
 	{ type: 'vocal', icon: '🎤', key: 'music.vocal', beta: true },
 	{ type: 'tonal', icon: '🎹', key: 'music.tonal', beta: true },
+	{ type: 'notes', icon: '🎼', key: 'music.notes', beta: true },
 	{ type: 'intro', icon: '🥁', key: 'music.intro' },
 	{ type: 'introInstrument', icon: '🥁🎺', key: 'music.introInstrument' },
 ]
 const MUSIC_TYPES = MUSIC_TYPE_DEFS.filter(isVisible)
 
 // availability by rendering: 🥁 intro needs the anthem to actually have one
-// (`anthem.intro` seconds), 🎤 vocal and 🎹 tonal need their own recording.
-// 🎺 instrument and 🥁🎺 intro+instrument always work — with no intro the window
-// simply starts at 0, so 🥁🎺 is the whole recording either way.
+// (`anthem.intro` seconds), 🎤 vocal and 🎹 tonal need their own recording, 🎼
+// notes needs a written-out melody. 🎺 instrument and 🥁🎺 intro+instrument always
+// work — with no intro the window simply starts at 0, so 🥁🎺 is the whole
+// recording either way.
 function hasType(c: Country, type: MusicType): boolean {
 	if (type === 'intro') return !!c.anthem.intro
 	if (type === 'vocal') return !!c.anthem.hasVocal
 	if (type === 'tonal') return !!c.anthem.hasTonal
+	if (type === 'notes') return !!c.anthem.score
 	return true
 }
 
 // What to play for a country in a given rendering. The three instrumental
 // renderings are windows into ONE recording (`/sound/anthem/<code>.aac`):
 // 🥁 intro is 0 → intro, 🎺 instrument is intro → end, 🥁🎺 is the whole file.
-// 🎤 vocal and 🎹 tonal are separate recordings of their own.
+// 🎤 vocal and 🎹 tonal are separate recordings of their own, and 🎼 notes is
+// synthesized live from the written melody — no audio file at all.
 function clipFor(c: Country, type: MusicType): Clip {
+	if (type === 'notes' && c.anthem.score) return { score: c.anthem.score }
 	if (type === 'vocal' || type === 'tonal') return `/sound/${type}/${c.code}.aac`
 	const url = `/sound/anthem/${c.code}.aac`
 	const intro = c.anthem.intro ?? 0
@@ -152,10 +157,12 @@ function App() {
 		// flight mode: cache every available recording of every visible country.
 		// The instrumental renderings share one file, so de-duplicate the urls.
 		const visible = ALL_COUNTRIES.filter(c => !next.hiddenCountries.includes(c.code))
+		// (a synthesized score has no file, so clipUrl gives null for it)
 		const urlsFor = (countries: typeof visible) => [...new Set(
 			countries.flatMap(c => MUSIC_TYPES
 				.filter(m => hasType(c, m.type))
-				.map(m => clipUrl(clipFor(c, m.type)))))]
+				.map(m => clipUrl(clipFor(c, m.type)))
+				.filter((u): u is string => u !== null)))]
 		if (next.flightMode && !settings.flightMode) {
 			// just switched on: cache everything currently visible
 			cacheAudioUrls(urlsFor(visible))

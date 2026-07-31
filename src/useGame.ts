@@ -12,8 +12,12 @@ import { useEffect, useRef, useState } from 'react'
 
 const randomOf = <T,>(items: T[]): T => items[Math.floor(Math.random() * items.length)]
 
-// a prompt is a url, or a url with a start/end window into a longer recording
-type Clip = string | { url: string, start?: number, end?: number }
+// a prompt is a url, a url with a start/end window into a longer recording, or a
+// score played live by the synthesizer (nothing to download)
+type Clip =
+	| string
+	| { url: string, start?: number, end?: number }
+	| { score: { tempo: number, melody: string } }
 
 type AudioControls = {
 	stopSound: () => void,
@@ -78,10 +82,12 @@ export function useGame<T extends { code: string }>(
 		audio.stopSound()
 		const items = buildBoard()
 		setPreparing(true)
-		// several prompts can be windows into the same file, so de-duplicate
-		await preload([...new Set(items.map(i => {
+		// several prompts can be windows into the same file, so de-duplicate;
+		// synthesized scores have no file to fetch
+		await preload([...new Set(items.flatMap(i => {
 			const p = promptUrl(i)
-			return typeof p === 'string' ? p : p.url
+			if (typeof p === 'string') return [p]
+			return 'url' in p ? [p.url] : []
 		}))])
 		setPreparing(false)
 		const first = randomOf(items)

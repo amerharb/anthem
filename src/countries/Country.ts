@@ -19,6 +19,9 @@ export type Country = {
 			hasVocal?: boolean,
 			// true when a pure-tone (tonal) rendering is available
 			hasTonal?: boolean,
+			// the melody as notes, synthesized live in the browser instead of
+			// streaming a recording (see src/synth.ts for the format)
+			score?: { tempo: number, melody: string },
 			composed?: string, // ISO date 'yyyy-mm-dd', 'yyyy-mm' or 'yyyy'
 			adopted?: string, // ISO date 'yyyy-mm-dd', 'yyyy-mm' or 'yyyy' some countries have no adoption day
 		},

@@ -10,11 +10,17 @@
  */
 import { useCallback, useRef, useState } from 'react'
 import { getAudioBlob } from './audioCache'
+import { Score, playScore, Playing } from './synth'
 
-export type Clip = string | { url: string, start?: number, end?: number }
+// a clip is a recording (optionally a `start`/`end` window into it) or a score
+// played live by the synthesizer — nothing to download at all
+export type Clip = string | { url: string, start?: number, end?: number } | { score: Score }
 
-const asClip = (clip: Clip) => (typeof clip === 'string' ? { url: clip } : clip)
-export const clipUrl = (clip: Clip) => asClip(clip).url
+const isScore = (clip: Clip): clip is { score: Score } =>
+	typeof clip !== 'string' && 'score' in clip
+const asFile = (clip: Clip) => (typeof clip === 'string' ? { url: clip } : clip as { url: string, start?: number, end?: number })
+// the file a clip needs cached, or null for a synthesized score
+export const clipUrl = (clip: Clip) => (isScore(clip) ? null : asFile(clip).url)
 
 // short win/lose feedback sounds
 function playFx(name: 'correct' | 'wrong' | 'giveup') {
@@ -36,6 +42,8 @@ export function useAudio(onPlayed?: () => void) {
 	// It watches currentTime rather than counting wall-clock, so start-up decode
 	// lag or a stall can't cut the clip short.
 	const endTimer = useRef<ReturnType<typeof setInterval> | null>(null)
+	// the synthesized score currently sounding, if any
+	const playingSynth = useRef<Playing | null>(null)
 	// code of the item whose sound is playing, to show the play icon on its button
 	const [playingCode, setPlayingCode] = useState<string | null>(null)
 
@@ -58,6 +66,10 @@ export function useAudio(onPlayed?: () => void) {
 		if (endTimer.current) {
 			clearInterval(endTimer.current)
 			endTimer.current = null
+		}
+		if (playingSynth.current) {
+			playingSynth.current.stop()
+			playingSynth.current = null
 		}
 		if (playingAudio.current) {
 			playingAudio.current.onended = null
@@ -84,7 +96,22 @@ export function useAudio(onPlayed?: () => void) {
 	// reveal the answer. A clip with `start`/`end` plays only that window.
 	const play = useCallback(async (clip: Clip, code?: string) => {
 		if (mutedRef.current) return
-		const { url, start = 0, end } = asClip(clip)
+
+		// a score is synthesized live: nothing to fetch, nothing to decode
+		if (isScore(clip)) {
+			stopSound()
+			const handle = playScore(clip.score, () => {
+				if (playingSynth.current !== handle) return
+				playingSynth.current = null
+				if (code !== undefined) setPlayingCode(null)
+			})
+			if (!handle) return
+			playingSynth.current = handle
+			if (code !== undefined) setPlayingCode(code)
+			return
+		}
+
+		const { url, start = 0, end } = asFile(clip)
 		try {
 			const blob = await getAudioBlob(url)
 			if (!blob) return
