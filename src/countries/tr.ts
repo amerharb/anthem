@@ -14,6 +14,7 @@ export const tr: Country = {
 			en: 'The Independence March',
 			ar: 'نشيد الاستقلال',
 		},
+		intro: 5.33,
 		score: {
 			// F minor; melody from the MIDI's MELODY track (Software Toolworks World
 			// Atlas, 1991 — the anthem dates from 1921)

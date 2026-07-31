@@ -14,6 +14,7 @@ export const se: Country = {
 			en: 'Thou ancient, thou free',
 			ar: 'أيتها القديمة، أيتها الحرة',
 		},
+		intro: 7.42,
 		score: {
 			// Bb major; the source has no MELODY track, so the melody is its
 			// monophonic trumpet line (Software Toolworks World Atlas, 1991)
