@@ -30,3 +30,6 @@ yarn-error.log*
 # copyrighted arrangement ((p)(c) The Software Toolworks 1991 / Rob Wallace
 # Music). Only the melody transcribed from it ships, in src/countries/sy.ts.
 /midi/sy.midi
+/midi/lb.midi
+/midi/ae.midi
+/midi/om.midi

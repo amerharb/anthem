@@ -11,7 +11,15 @@ where it came from.
 | File | Anthem | Source | Notes |
 | --- | --- | --- | --- |
 | `us.midi` | The Star-Spangled Banner | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:2_Star_Spangled_Banner.mid) — public domain | piano arrangement; the melody is the top voice |
-| `sy.midi` | حماة الديار (Homat el Diyar) | [BitMidi](https://bitmidi.com/national-anthem-syria-mid) | has a track named `MELODY`; cross-checked against the published score |
+| `sy.midi` | حماة الديار (Homat el Diyar) | [BitMidi](https://bitmidi.com/national-anthem-syria-mid) | `MELODY` track; cross-checked against the published score |
+| `lb.midi` | كلنا للوطن | BitMidi `/uploads/79438.mid` | `MELODY` track; anthem unchanged since 1927 |
+| `ae.midi` | عيشي بلادي | BitMidi `/uploads/79487.mid` | `MELODY` track; anthem music unchanged since 1971 |
+| `om.midi` | السلام السلطاني | BitMidi `/uploads/79452.mid` | `MELODY` track; **predates Oman's 1996 revision** — verify before trusting |
+
+All four Arabic-anthem files above come from the same Software Toolworks *World
+Atlas* (1991) collection. Always check what the anthem **was in 1991** before
+transcribing from it — that is exactly how Iraq's file turned out to be the wrong
+anthem (see below).
 
 For Syria the melody was also checked against the printed score (Mohammad and
 Ahmad Salim Flayfel, A major, 4/4, quarter = 100), available from
@@ -33,12 +41,12 @@ Do not transcribe from a pure-tone rendering: the ones this project started with
 
 `us.midi` is public domain (Wikimedia Commons) and is committed here.
 
-`sy.midi` is **not committed** — it is listed in `.gitignore`. Its metadata reads
-"(p) (c) The Software Toolworks 1991 / Rob Wallace Music", so the file is someone
-else's copyrighted arrangement; redistributing it from a public repo is not ours
-to do. It stays on disk locally for reference, and the table above records where
-to get it again. What ships is only the melody transcribed from it, in
-`src/countries/sy.ts`.
+`sy.midi`, `lb.midi`, `ae.midi` and `om.midi` are **not committed** — they are
+listed in `.gitignore`. They carry "(p) (c) The Software Toolworks 1991" in their
+metadata, so they are someone else's copyrighted arrangements; redistributing
+them from a public repo is not ours to do. They stay on disk locally for
+reference, and the table above records where to get them again. What ships is
+only the melodies transcribed from them, in `src/countries/*.ts`.
 
 Note that the underlying compositions are a separate question from the MIDI
 files: several anthem melodies here are 20th-century works still in copyright in
