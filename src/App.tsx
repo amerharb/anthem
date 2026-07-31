@@ -36,14 +36,17 @@ function shuffle<T>(items: T[]): T[] {
 
 // the anthem renderings the app can play. This replaces the old "content
 // language" dropdown: the choice is now which rendering you hear.
+// 🎤 vocal and 🎹 tonal are beta: their recordings are still being worked on, so
+// they show while developing but are hidden from the production build.
 export type MusicType = 'instrument' | 'vocal' | 'tonal' | 'intro' | 'introInstrument'
-const MUSIC_TYPES: { type: MusicType, icon: string, key: string }[] = [
+const MUSIC_TYPE_DEFS: { type: MusicType, icon: string, key: string, beta?: boolean }[] = [
 	{ type: 'instrument', icon: '🎺', key: 'music.instrument' },
-	{ type: 'vocal', icon: '🎤', key: 'music.vocal' },
-	{ type: 'tonal', icon: '🎹', key: 'music.tonal' },
+	{ type: 'vocal', icon: '🎤', key: 'music.vocal', beta: true },
+	{ type: 'tonal', icon: '🎹', key: 'music.tonal', beta: true },
 	{ type: 'intro', icon: '🥁', key: 'music.intro' },
 	{ type: 'introInstrument', icon: '🥁🎺', key: 'music.introInstrument' },
 ]
+const MUSIC_TYPES = MUSIC_TYPE_DEFS.filter(isVisible)
 
 // availability by rendering: 🥁 intro needs the anthem to actually have one
 // (`anthem.intro` seconds), 🎤 vocal and 🎹 tonal need their own recording.
