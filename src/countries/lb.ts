@@ -5,6 +5,10 @@ export const lb: Country = {
 	name: {
 		en: 'Lebanon',
 		ar: 'لبنان',
+		el: 'Λίβανος',
+		sv: 'Libanon',
+		tr: 'Lübnan',
+		th: 'เลบานอน',
 	},
 	flag: '🇱🇧',
 	nativeLanguage: 'ar',

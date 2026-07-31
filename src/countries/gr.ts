@@ -5,6 +5,10 @@ export const gr: Country = {
 	name: {
 		en: 'Greece',
 		ar: 'اليونان',
+		el: 'Ελλάδα',
+		sv: 'Grekland',
+		tr: 'Yunanistan',
+		th: 'กรีซ',
 	},
 	flag: '🇬🇷',
 	nativeLanguage: 'el',

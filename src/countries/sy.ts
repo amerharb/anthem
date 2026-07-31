@@ -5,6 +5,10 @@ export const sy: Country = {
 	name: {
 		en: 'Syria',
 		ar: 'سوريا',
+		el: 'Συρία',
+		sv: 'Syrien',
+		tr: 'Suriye',
+		th: 'ซีเรีย',
 	},
 	flag: '🇸🇾',
 	nativeLanguage: 'ar',

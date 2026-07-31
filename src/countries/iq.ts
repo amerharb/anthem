@@ -5,6 +5,10 @@ export const iq: Country = {
 	name: {
 		en: 'Iraq',
 		ar: 'العراق',
+		el: 'Ιράκ',
+		sv: 'Irak',
+		tr: 'Irak',
+		th: 'อิรัก',
 	},
 	flag: '🇮🇶',
 	nativeLanguage: 'ar',

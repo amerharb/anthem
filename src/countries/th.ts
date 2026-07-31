@@ -5,6 +5,10 @@ export const th: Country = {
 	name: {
 		en: 'Thailand',
 		ar: 'تايلاند',
+		el: 'Ταϊλάνδη',
+		sv: 'Thailand',
+		tr: 'Tayland',
+		th: 'ประเทศไทย',
 	},
 	flag: '🇹🇭',
 	nativeLanguage: 'th',

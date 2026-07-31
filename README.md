@@ -37,6 +37,13 @@ the selected type is shown disabled rather than hidden.
 ## Interface languages
 - English
 - Arabic (عربي)
+- Greek (Ελληνικά)
+- Swedish (Svenska)
+- Thai (ไทย)
+- Turkish (Türkçe)
+
+Every country's name is translated into all six, so the cards read in whichever
+one is selected. Any UI string missing from a translation falls back to English.
 
 ## How it works
 Pick the anthem type from the dropdown in the top right, then click a card to

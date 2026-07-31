@@ -1,6 +1,6 @@
-// 'en' and 'ar' are the interface languages; they also key each country's
-// display name (shown on a card when the display mode is "name").
-export type Language = 'en' | 'ar'
+// the interface languages; they also key each country's display name (shown on a
+// card when the display mode is "name"), so every country needs all of them.
+export type Language = 'en' | 'ar' | 'el' | 'sv' | 'th' | 'tr'
 
 // The language the anthem itself is sung in (ISO 639-1). Separate from the
 // interface languages above — most anthems are in neither of them. Add a code
@@ -14,7 +14,9 @@ export type Country = {
 		nativeLanguage: NativeLanguage,
     anthem: {
 			nativeName: string,
-			name: Record<Language, string>,
+			// the anthem's title translated. Not shown in the UI yet, so it is
+			// partial — fill a language in when there is a reliable translation.
+			name: Partial<Record<Language, string>>,
 			// where the anthem's intro ends, in seconds into the recording. The one
 			// recording covers every instrumental rendering: 🥁 intro plays 0 → intro,
 			// 🎺 instrument plays intro → end, 🥁🎺 plays the whole file.

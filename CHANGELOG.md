@@ -24,8 +24,9 @@
   recording (seamless by construction)
 - Each card shows either the country's flag or its name — a toggle in the
   settings panel (🏳️ flag / 🔤 name)
-- Interface localized in English and Arabic (👁️ dropdown in settings), following
-  the browser language on first run; Arabic lays the cards out right-to-left
+- Interface localized in English, Arabic, Greek, Swedish, Thai and Turkish (👁️
+  dropdown in settings), following the browser language on first run; Arabic lays
+  the cards out right-to-left. Country names are translated into all six
 - Guessing game (🕹️): a random country's anthem plays and you tap the matching
   card, with live score, give-up (🤷‍♂️) and round controls (👂 ✋ 🔄), shared
   with the sister apps
