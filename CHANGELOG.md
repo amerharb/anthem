@@ -14,11 +14,13 @@
   pseudo-language codes from Flags
 - A country that lacks the selected type is shown **disabled** rather than
   hidden, so the board stays stable while switching types. Availability comes
-  from the country data (`hasDistinctIntro`, `hasVocal`)
-- 🥁🎺 works for every country: those with their own intro play one seamless
-  recording, and those without play a shared general drum intro
-  (`intro/general.aac`) straight into their anthem — sequenced at playback time,
-  with every clip fetched up front so the join has no gap
+  from the country data (`anthem.intro`, `anthem.hasVocal`)
+- One recording per country serves all three instrumental renderings: the
+  country file records where the intro ends (`anthem.intro`, in seconds) and
+  playback windows into `anthem/<code>.aac` — 🥁 plays 0 → intro, 🎺 plays
+  intro → end, 🥁🎺 plays the whole file. No split or stitched files, so a
+  country needs one third of the audio and the 🥁🎺 join is the original
+  recording (seamless by construction)
 - Each card shows either the country's flag or its name — a toggle in the
   settings panel (🏳️ flag / 🔤 name)
 - Interface localized in English and Arabic (👁️ dropdown in settings), following
@@ -32,8 +34,6 @@
   flag emoji is shown (the card faces in Flag display mode and the settings flag
   grid), so flags render on platforms whose OS lacks flag-emoji glyphs (e.g.
   Windows/Chromium), with the platform emoji fonts as fallback
-- `scripts/split-anthem.sh <code> <intro-seconds>` splits a full recording into
-  its intro and instrument parts, so a new country needs no manual trimming
 - Built on the shared architecture of the sister apps (Vite, React 19,
   TypeScript 6): `useAudio`, `useGame`, `GameHud`, `useFitText`, the IndexedDB
   audio cache and the i18n helper

@@ -12,10 +12,13 @@ import { useEffect, useRef, useState } from 'react'
 
 const randomOf = <T,>(items: T[]): T => items[Math.floor(Math.random() * items.length)]
 
+// a prompt is a url, or a url with a start/end window into a longer recording
+type Clip = string | { url: string, start?: number, end?: number }
+
 type AudioControls = {
 	stopSound: () => void,
-	play: (url: string | string[], code?: string) => void | Promise<void>,
-	schedulePrompt: (url: string | string[], delayMs: number) => void,
+	play: (clip: Clip, code?: string) => void | Promise<void>,
+	schedulePrompt: (clip: Clip, delayMs: number) => void,
 	cancelPrompt: () => void,
 	fx: (name: 'correct' | 'wrong' | 'giveup') => void,
 }
@@ -25,8 +28,8 @@ type UseGameOptions<T> = {
 	canPlay: boolean,
 	// the board for a new round, in the order it should be shown
 	buildBoard: () => T[],
-	// the sound file(s) of an item's prompt; an array plays back-to-back as one prompt
-	promptUrl: (item: T) => string | string[],
+	// an item's prompt: a sound file, or a window into one
+	promptUrl: (item: T) => Clip,
 	// pre-download the round's prompts so gameplay never waits on the network
 	preload: (urls: string[]) => Promise<void>,
 	audio: AudioControls,
@@ -75,10 +78,11 @@ export function useGame<T extends { code: string }>(
 		audio.stopSound()
 		const items = buildBoard()
 		setPreparing(true)
-		await preload(items.flatMap(i => {
-			const u = promptUrl(i)
-			return Array.isArray(u) ? u : [u]
-		}))
+		// several prompts can be windows into the same file, so de-duplicate
+		await preload([...new Set(items.map(i => {
+			const p = promptUrl(i)
+			return typeof p === 'string' ? p : p.url
+		}))])
 		setPreparing(false)
 		const first = randomOf(items)
 		setBoard(items)

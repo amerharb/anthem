@@ -14,7 +14,7 @@ export const lb: Country = {
 			en: 'All of Us, for Our Country',
 			ar: 'كلنا للوطن',
 		},
-		hasDistinctIntro: true,
+		intro: 17,
 		composed: '1925',
 		adopted: '1927-07-12',
 	},

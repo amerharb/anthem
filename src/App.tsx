@@ -14,7 +14,7 @@ import {
 	applyTheme,
 } from './settingsStore'
 import { ensureCached, idbCount, idbClear } from './audioCache'
-import { useAudio } from './useAudio'
+import { useAudio, clipUrl, Clip } from './useAudio'
 import { useGame } from './useGame'
 import { useFitText } from './useFitText'
 import { translator, UI_LANGUAGES } from './i18n'
@@ -22,6 +22,7 @@ import { sy } from './countries/sy'
 import { iq } from './countries/iq'
 import { lb } from './countries/lb'
 import { ae } from './countries/ae'
+import { om } from './countries/om'
 
 // Fisher–Yates shuffle into a new array (used to scramble the card positions on game start)
 function shuffle<T>(items: T[]): T[] {
@@ -33,8 +34,8 @@ function shuffle<T>(items: T[]): T[] {
 	return out
 }
 
-// the two kinds of anthem audio the app can play. This replaces the old
-// "content language" dropdown: the choice is now which rendering you hear.
+// the anthem renderings the app can play. This replaces the old "content
+// language" dropdown: the choice is now which rendering you hear.
 export type MusicType = 'instrument' | 'vocal' | 'tonal' | 'intro' | 'introInstrument'
 const MUSIC_TYPES: { type: MusicType, icon: string, key: string }[] = [
 	{ type: 'instrument', icon: '🎺', key: 'music.instrument' },
@@ -44,29 +45,31 @@ const MUSIC_TYPES: { type: MusicType, icon: string, key: string }[] = [
 	{ type: 'introInstrument', icon: '🥁🎺', key: 'music.introInstrument' },
 ]
 
-// availability by rendering: 'intro' needs the country's own distinct intro,
-// 'vocal' needs a sung recording; 'instrument', 'tonal' and 'introInstrument'
-// work for every country (a country without its own intro uses the general
-// drum intro before its instrument — see filesFor)
+// availability by rendering: 🥁 intro and 🥁🎺 intro+instrument need the anthem
+// to have a distinct intro (`anthem.intro` seconds), 🎤 vocal needs a sung
+// recording; 🎺 instrument and 🎹 tonal work for every country
 function hasType(c: Country, type: MusicType): boolean {
-	if (type === 'intro') return c.anthem.hasDistinctIntro
+	if (type === 'intro' || type === 'introInstrument') return !!c.anthem.intro
 	if (type === 'vocal') return !!c.anthem.hasVocal
 	return true
 }
 
-// the actual sound file(s) for a country in a given rendering. 'introInstrument'
-// for a country without a distinct intro is the general drum intro played
-// before its instrument anthem — two clips, no pre-joined file needed
-function filesFor(c: Country, type: MusicType): string[] {
-	if (type === 'introInstrument' && !c.anthem.hasDistinctIntro) {
-		return ['/sound/intro/general.aac', `/sound/instrument/${c.code}.aac`]
-	}
-	return [`/sound/${type}/${c.code}.aac`]
+// What to play for a country in a given rendering. The three instrumental
+// renderings are windows into ONE recording (`/sound/anthem/<code>.aac`):
+// 🥁 intro is 0 → intro, 🎺 instrument is intro → end, 🥁🎺 is the whole file.
+// 🎤 vocal and 🎹 tonal are separate recordings of their own.
+function clipFor(c: Country, type: MusicType): Clip {
+	if (type === 'vocal' || type === 'tonal') return `/sound/${type}/${c.code}.aac`
+	const url = `/sound/anthem/${c.code}.aac`
+	const intro = c.anthem.intro ?? 0
+	if (type === 'intro') return { url, end: intro }
+	if (type === 'instrument') return intro > 0 ? { url, start: intro } : url
+	return url // introInstrument: the whole recording
 }
 
 function App() {
 	// everything the build supports (after the beta feature flag)
-	const ALL_COUNTRIES: Country[] = [sy, iq, lb, ae].filter(isVisible)
+	const ALL_COUNTRIES: Country[] = [sy, iq, lb, ae, om].filter(isVisible)
 
 	// true while flight-mode downloads are in progress, to show it on the toggle
 	const [caching, setCaching] = useState(false)
@@ -140,12 +143,13 @@ function App() {
 			audio.stopSound()
 		}
 
-		// flight mode: cache both anthem renderings for every visible country
+		// flight mode: cache every available recording of every visible country.
+		// The instrumental renderings share one file, so de-duplicate the urls.
 		const visible = ALL_COUNTRIES.filter(c => !next.hiddenCountries.includes(c.code))
-		const urlsFor = (countries: typeof visible) => Array.from(new Set(
+		const urlsFor = (countries: typeof visible) => [...new Set(
 			countries.flatMap(c => MUSIC_TYPES
 				.filter(m => hasType(c, m.type))
-				.flatMap(m => filesFor(c, m.type)))))
+				.map(m => clipUrl(clipFor(c, m.type)))))]
 		if (next.flightMode && !settings.flightMode) {
 			// just switched on: cache everything currently visible
 			cacheAudioUrls(urlsFor(visible))
@@ -176,14 +180,15 @@ function App() {
 
 	// the anthem sound file(s) of a country in the selected rendering (an array
 	// when it's a general-intro-then-instrument sequence)
-	const anthemUrls = (c: Country) => filesFor(c, musicType)
+	// what to play for a country in the selected rendering
+	const anthemClip = (c: Country) => clipFor(c, musicType)
 
 	// the game: recognise the country from its anthem — the cards shuffle each round
 	// (only the countries that have the selected rendering take part)
 	const game = useGame<Country>({
 		canPlay: PLAYABLE.length > 0,
 		buildBoard: () => shuffle(PLAYABLE),
-		promptUrl: c => anthemUrls(c),
+		promptUrl: c => anthemClip(c),
 		preload: async urls => {
 			await ensureCached(urls)
 			refreshCacheCount()
@@ -320,7 +325,7 @@ function App() {
 								} else if (audio.playingCode === c.code) {
 									audio.stopSound()
 								} else {
-									audio.play(anthemUrls(c), c.code)
+									audio.play(anthemClip(c), c.code)
 									setShownName(c.name[settings.uiLanguage])
 								}
 							}}

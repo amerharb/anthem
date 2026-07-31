@@ -9,13 +9,22 @@ Sister project of [Flags](https://github.com/amerharb/flags),
 [Arqaam](https://github.com/amerharb/arqaam).
 
 ## Countries supported
-- Syria 🇸🇾
+- United Arab Emirates 🇦🇪
 - Iraq 🇮🇶
+- Lebanon 🇱🇧
+- Oman 🇴🇲
+- Syria 🇸🇾
 - More to come, see How to contribute
 
 ## Anthem types
-- 🎺 **Instrument** — a recorded instrumental performance of the anthem
+- 🎺 **Instrument** — the instrumental anthem (after the intro, when there is one)
+- 🎤 **Vocal** — the anthem sung in the country's native language
 - 🎹 **Tonal** — a pure-tone rendering of the melody's main notes
+- 🥁 **Intro** — just the anthem's opening intro
+- 🥁🎺 **Intro + Instrument** — the intro straight into the anthem
+
+🥁 and 🥁🎺 only apply to anthems that have a distinct intro, and 🎤 only where a
+sung recording exists; a country without the selected type is shown disabled.
 
 ## Interface languages
 - English
@@ -51,37 +60,27 @@ The visible countries can be set from the URL, for a shareable view:
 
 ## How to contribute
 ### Media files
-Each country needs its anthem audio (AAC) under `public/sound/`:
+Audio lives under `public/sound/` as AAC, one file per recording:
 
+- `anthem/<code>.aac` — the **whole** instrumental recording, intro included.
+  The 🥁 / 🎺 / 🥁🎺 renderings are all windows into this single file, so there is
+  nothing to split or trim: just set `anthem.intro` (seconds) in the country file
+  and the app plays 0 → intro, intro → end, or the whole thing
+- `vocal/<code>.aac` — the sung version (only for countries with `hasVocal: true`)
 - `tonal/<code>.aac` — the pure-tone melody
-- `introInstrument/<code>.aac` — the **full** recording (intro + instrument in
-  one seamless take); this is the master
-- `intro/<code>.aac` and `instrument/<code>.aac` — the full recording **split**
-  in two: the drum intro, then the rest
-
-For a country whose anthem has a distinct intro, drop the full recording at
-`introInstrument/<code>.aac` and split it with the helper (no guesswork needed):
-
-```
-scripts/split-anthem.sh <code> <intro-seconds>
-# e.g. scripts/split-anthem.sh iq 4.3
-```
-
-It writes `intro/<code>.aac` (the first N seconds) and `instrument/<code>.aac`
-(the rest), in the app's audio format. For a country with **no** distinct intro,
-just provide `instrument/<code>.aac` and `tonal/<code>.aac`; the app plays the
-shared `intro/general.aac` before it in the Intro + Instrument mode.
 
 ### Coding
 Anthem is an open source project built on Vite, React 19, TypeScript v6.x and
 npm. All the code is Frontend, no backend needed.
 
 To add a country:
-1. Create `src/countries/<code>.ts` exporting a `Country` (`code`, `name`, `flag`)
-   with the name in English and Arabic.
-2. Import it and add it to the `ALL_COUNTRIES` array in `src/App.tsx`.
-3. Drop the audio at `public/sound/instrument/<code>.aac` and
-   `public/sound/tonal/<code>.aac`.
+1. Create `src/countries/<code>.ts` exporting a `Country` (`code`, `name`, `flag`,
+   `nativeLanguage`, `anthem`) with the name in English and Arabic.
+2. If its anthem has a distinct intro, set `anthem.intro` to the second it ends
+   (e.g. `intro: 4.3`); leave it out when there is none.
+3. Import it and add it to the `ALL_COUNTRIES` array in `src/App.tsx`.
+4. Drop the audio at `public/sound/anthem/<code>.aac` (plus `tonal/` and
+   `vocal/` if available).
 
 #### Setup environment
 - Node 20.19 or above

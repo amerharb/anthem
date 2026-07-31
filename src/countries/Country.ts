@@ -10,7 +10,11 @@ export type Country = {
     anthem: {
 			nativeName: string,
 			name: Record<Language, string>,
-			hasDistinctIntro: boolean,
+			// where the anthem's intro ends, in seconds into the recording. The one
+			// recording covers every instrumental rendering: 🥁 intro plays 0 → intro,
+			// 🎺 instrument plays intro → end, 🥁🎺 plays the whole file.
+			// 0 or absent means the anthem has no distinct intro.
+			intro?: number,
 			// true when a sung (vocal, native-language) recording is available
 			hasVocal?: boolean,
 			composed?: string, // ISO date 'yyyy-mm-dd', 'yyyy-mm' or 'yyyy'

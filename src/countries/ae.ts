@@ -14,7 +14,6 @@ export const ae: Country = {
 			en: 'Long Live My Country',
 			ar: 'عيشي بلادي',
 		},
-		hasDistinctIntro: false,
 		composed: '1971',
 		adopted: '1971-12-02',
 	},

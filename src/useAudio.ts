@@ -3,9 +3,18 @@
  * sound stops the current one), the mute toggle (🔊/🔇), the pending next-prompt
  * timer, and the short feedback sounds. Playback reads from the IndexedDB cache
  * (works in Safari Lockdown Mode) and falls back to the network.
+ *
+ * A clip can be a bare url, or a url with a `start`/`end` window into it — one
+ * recording then serves several renderings (e.g. an anthem's intro is 0 → intro
+ * and the anthem proper is intro → end of the same file).
  */
 import { useCallback, useRef, useState } from 'react'
 import { getAudioBlob } from './audioCache'
+
+export type Clip = string | { url: string, start?: number, end?: number }
+
+const asClip = (clip: Clip) => (typeof clip === 'string' ? { url: clip } : clip)
+export const clipUrl = (clip: Clip) => asClip(clip).url
 
 // short win/lose feedback sounds
 function playFx(name: 'correct' | 'wrong' | 'giveup') {
@@ -21,9 +30,12 @@ function playFx(name: 'correct' | 'wrong' | 'giveup') {
 export function useAudio(onPlayed?: () => void) {
 	// the sound currently playing, so starting a new one can stop it first
 	const playingAudio = useRef<HTMLAudioElement | null>(null)
-	// object URLs for the clips of the current (possibly multi-part) playback,
-	// kept so they can all be revoked when playback stops
-	const seqUrls = useRef<string[]>([])
+	// object URL of what is playing, so it can be revoked when playback stops
+	const playingUrl = useRef<string | null>(null)
+	// poller that ends playback at a clip's `end` (a window into a longer file).
+	// It watches currentTime rather than counting wall-clock, so start-up decode
+	// lag or a stall can't cut the clip short.
+	const endTimer = useRef<ReturnType<typeof setInterval> | null>(null)
 	// code of the item whose sound is playing, to show the play icon on its button
 	const [playingCode, setPlayingCode] = useState<string | null>(null)
 
@@ -43,13 +55,19 @@ export function useAudio(onPlayed?: () => void) {
 			clearTimeout(promptTimer.current)
 			promptTimer.current = null
 		}
+		if (endTimer.current) {
+			clearInterval(endTimer.current)
+			endTimer.current = null
+		}
 		if (playingAudio.current) {
 			playingAudio.current.onended = null
 			playingAudio.current.pause()
 			playingAudio.current = null
 		}
-		seqUrls.current.forEach(u => URL.revokeObjectURL(u))
-		seqUrls.current = []
+		if (playingUrl.current) {
+			URL.revokeObjectURL(playingUrl.current)
+			playingUrl.current = null
+		}
 		setPlayingCode(null)
 	}, [])
 
@@ -61,51 +79,70 @@ export function useAudio(onPlayed?: () => void) {
 		setMuted(next)
 	}
 
-	// Play a sound, stopping the current one first. A string[] plays the clips
-	// back-to-back as one prompt (e.g. a general drum intro then the anthem) —
-	// all clips are fetched and primed up front so the join has no gap. With
-	// `code` the matching button shows the play icon; game prompts pass none —
-	// a ▶ on the target button would reveal the answer.
-	const play = useCallback(async (url: string | string[], code?: string) => {
+	// Play a clip, stopping the current one first. With `code` the matching button
+	// shows the play icon; game prompts pass none — a ▶ on the target button would
+	// reveal the answer. A clip with `start`/`end` plays only that window.
+	const play = useCallback(async (clip: Clip, code?: string) => {
 		if (mutedRef.current) return
-		const urls = Array.isArray(url) ? url : [url]
+		const { url, start = 0, end } = asClip(clip)
 		try {
-			// fetch every clip's blob first, so the transition never waits on I/O
-			const blobs = await Promise.all(urls.map(getAudioBlob))
-			const objectUrls = blobs.filter(Boolean).map(b => URL.createObjectURL(b as Blob))
-			if (objectUrls.length === 0) return
+			const blob = await getAudioBlob(url)
+			if (!blob) return
+			const objectUrl = URL.createObjectURL(blob)
 			// stop and clean up whatever was playing
 			if (playingAudio.current) {
 				playingAudio.current.onended = null
 				playingAudio.current.pause()
 			}
-			seqUrls.current.forEach(u => URL.revokeObjectURL(u))
-			seqUrls.current = objectUrls.slice()
-			// pre-create and load all elements so each next clip starts instantly
-			const elements = objectUrls.map(u => {
-				const a = new Audio(u)
-				a.preload = 'auto'
-				a.load()
-				return a
-			})
-			let idx = 0
-			const step = () => {
-				const a = elements[idx]
-				playingAudio.current = a
-				a.onended = () => {
-					URL.revokeObjectURL(objectUrls[idx])
-					if (idx + 1 < elements.length) {
-						idx += 1
-						step()
-					} else {
-						seqUrls.current = []
-						playingAudio.current = null
-						if (code !== undefined) setPlayingCode(null)
+			if (endTimer.current) {
+				clearInterval(endTimer.current)
+				endTimer.current = null
+			}
+			if (playingUrl.current) URL.revokeObjectURL(playingUrl.current)
+
+			const audio = new Audio(objectUrl)
+			playingAudio.current = audio
+			playingUrl.current = objectUrl
+
+			const finish = () => {
+				if (playingAudio.current !== audio) return
+				if (endTimer.current) {
+					clearInterval(endTimer.current)
+					endTimer.current = null
+				}
+				audio.onended = null
+				audio.pause()
+				URL.revokeObjectURL(objectUrl)
+				playingAudio.current = null
+				playingUrl.current = null
+				if (code !== undefined) setPlayingCode(null)
+			}
+			audio.onended = finish
+
+			const begin = () => {
+				if (start > 0) {
+					try {
+						audio.currentTime = start
+					} catch {
+						// seeking unsupported: play from the beginning
 					}
 				}
-				a.play().catch(() => {})
+				audio.play().catch(() => {})
+				// a windowed clip ends at `end`: poll currentTime so the cut lands on
+				// the audio's own clock (±50 ms), not on wall-clock elapsed time
+				if (end !== undefined) {
+					endTimer.current = setInterval(() => {
+						if (audio.currentTime >= end) finish()
+					}, 50)
+				}
 			}
-			step()
+			// seeking needs the duration, so wait for metadata when it isn't there yet
+			if (start > 0 && audio.readyState < 1) {
+				audio.addEventListener('loadedmetadata', begin, { once: true })
+			} else {
+				begin()
+			}
+
 			if (code !== undefined) {
 				setPlayingCode(code)
 				onPlayed?.()
@@ -125,8 +162,8 @@ export function useAudio(onPlayed?: () => void) {
 
 	// play a prompt after a delay (lets the game feedback land first);
 	// cancelled by stopSound or cancelPrompt
-	const schedulePrompt = useCallback((url: string | string[], delayMs: number) => {
-		promptTimer.current = setTimeout(() => play(url), delayMs)
+	const schedulePrompt = useCallback((clip: Clip, delayMs: number) => {
+		promptTimer.current = setTimeout(() => play(clip), delayMs)
 	}, [play])
 
 	// feedback sounds respect the mute toggle

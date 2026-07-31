@@ -14,7 +14,7 @@ export const iq: Country = {
 			en: 'My Homeland',
 			ar: 'موطني',
 		},
-		hasDistinctIntro: true,
+		intro: 4.3,
 		composed: '1934',
 		adopted: '2004',
 	},
