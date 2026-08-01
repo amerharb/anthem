@@ -5,10 +5,11 @@ export const pl: Country = {
 	name: {
 		en: 'Poland',
 		ar: 'بولندا',
+		de: 'Polen',
 		el: 'Πολωνία',
 		sv: 'Polen',
-		tr: 'Polonya',
 		th: 'โปแลนด์',
+		tr: 'Polonya',
 	},
 	flag: '🇵🇱',
 	nativeLanguage: 'pl',

@@ -5,10 +5,11 @@ export const ps: Country = {
 	name: {
 		en: 'Palestine',
 		ar: 'فلسطين',
+		de: 'Palästina',
 		el: 'Παλαιστίνη',
 		sv: 'Palestina',
-		tr: 'Filistin',
 		th: 'ปาเลสไตน์',
+		tr: 'Filistin',
 	},
 	flag: '🇵🇸',
 	nativeLanguage: 'ar',

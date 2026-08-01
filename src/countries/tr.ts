@@ -5,10 +5,11 @@ export const tr: Country = {
 	name: {
 		en: 'Turkey',
 		ar: 'تركيا',
+		de: 'Türkei',
 		el: 'Τουρκία',
 		sv: 'Turkiet',
-		tr: 'Türkiye',
 		th: 'ตุรกี',
+		tr: 'Türkiye',
 	},
 	flag: '🇹🇷',
 	nativeLanguage: 'tr',

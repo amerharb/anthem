@@ -5,10 +5,11 @@ export const ua: Country = {
 	name: {
 		en: 'Ukraine',
 		ar: 'أوكرانيا',
+		de: 'Ukraine',
 		el: 'Ουκρανία',
 		sv: 'Ukraina',
-		tr: 'Ukrayna',
 		th: 'ยูเครน',
+		tr: 'Ukrayna',
 	},
 	flag: '🇺🇦',
 	nativeLanguage: 'uk',

@@ -5,10 +5,11 @@ export const pt: Country = {
 	name: {
 		en: 'Portugal',
 		ar: 'البرتغال',
+		de: 'Portugal',
 		el: 'Πορτογαλία',
 		sv: 'Portugal',
-		tr: 'Portekiz',
 		th: 'โปรตุเกส',
+		tr: 'Portekiz',
 	},
 	flag: '🇵🇹',
 	nativeLanguage: 'pt',

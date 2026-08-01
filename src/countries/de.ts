@@ -5,10 +5,11 @@ export const de: Country = {
 	name: {
 		en: 'Germany',
 		ar: 'ألمانيا',
+		de: 'Deutschland',
 		el: 'Γερμανία',
 		sv: 'Tyskland',
-		tr: 'Almanya',
 		th: 'เยอรมนี',
+		tr: 'Almanya',
 	},
 	flag: '🇩🇪',
 	nativeLanguage: 'de',

@@ -5,10 +5,11 @@ export const eg: Country = {
 	name: {
 		en: 'Egypt',
 		ar: 'مصر',
+		de: 'Ägypten',
 		el: 'Αίγυπτος',
 		sv: 'Egypten',
-		tr: 'Mısır',
 		th: 'อียิปต์',
+		tr: 'Mısır',
 	},
 	flag: '🇪🇬',
 	nativeLanguage: 'ar',

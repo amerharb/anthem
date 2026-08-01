@@ -5,10 +5,11 @@ export const se: Country = {
 	name: {
 		en: 'Sweden',
 		ar: 'السويد',
+		de: 'Schweden',
 		el: 'Σουηδία',
 		sv: 'Sverige',
-		tr: 'İsveç',
 		th: 'สวีเดน',
+		tr: 'İsveç',
 	},
 	flag: '🇸🇪',
 	nativeLanguage: 'sv',

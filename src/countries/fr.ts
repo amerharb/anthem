@@ -5,10 +5,11 @@ export const fr: Country = {
 	name: {
 		en: 'France',
 		ar: 'فرنسا',
+		de: 'Frankreich',
 		el: 'Γαλλία',
 		sv: 'Frankrike',
-		tr: 'Fransa',
 		th: 'ฝรั่งเศส',
+		tr: 'Fransa',
 	},
 	flag: '🇫🇷',
 	nativeLanguage: 'fr',

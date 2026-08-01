@@ -5,10 +5,11 @@ export const us: Country = {
 	name: {
 		en: 'United States of America',
 		ar: 'الولايات المتحدة الأمريكية',
+		de: 'Vereinigte Staaten von Amerika',
 		el: 'Ηνωμένες Πολιτείες Αμερικής',
 		sv: 'USA',
-		tr: 'Amerika Birleşik Devletleri',
 		th: 'สหรัฐอเมริกา',
+		tr: 'Amerika Birleşik Devletleri',
 	},
 	flag: '🇺🇸',
 	nativeLanguage: 'en',

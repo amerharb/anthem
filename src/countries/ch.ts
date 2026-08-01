@@ -5,10 +5,11 @@ export const ch: Country = {
 	name: {
 		en: 'Switzerland',
 		ar: 'سويسرا',
+		de: 'Schweiz',
 		el: 'Ελβετία',
 		sv: 'Schweiz',
-		tr: 'İsviçre',
 		th: 'สวิตเซอร์แลนด์',
+		tr: 'İsviçre',
 	},
 	flag: '🇨🇭',
 	nativeLanguage: 'de',

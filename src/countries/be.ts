@@ -5,10 +5,11 @@ export const be: Country = {
 	name: {
 		en: 'Belgium',
 		ar: 'بلجيكا',
+		de: 'Belgien',
 		el: 'Βέλγιο',
 		sv: 'Belgien',
-		tr: 'Belçika',
 		th: 'เบลเยียม',
+		tr: 'Belçika',
 	},
 	flag: '🇧🇪',
 	nativeLanguage: 'nl',

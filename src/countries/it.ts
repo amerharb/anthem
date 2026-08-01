@@ -5,10 +5,11 @@ export const it: Country = {
 	name: {
 		en: 'Italy',
 		ar: 'إيطاليا',
+		de: 'Italien',
 		el: 'Ιταλία',
 		sv: 'Italien',
-		tr: 'İtalya',
 		th: 'อิตาลี',
+		tr: 'İtalya',
 	},
 	flag: '🇮🇹',
 	nativeLanguage: 'it',

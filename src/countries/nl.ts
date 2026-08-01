@@ -5,10 +5,11 @@ export const nl: Country = {
 	name: {
 		en: 'Netherlands',
 		ar: 'هولندا',
+		de: 'Niederlande',
 		el: 'Ολλανδία',
 		sv: 'Nederländerna',
-		tr: 'Hollanda',
 		th: 'เนเธอร์แลนด์',
+		tr: 'Hollanda',
 	},
 	flag: '🇳🇱',
 	nativeLanguage: 'nl',

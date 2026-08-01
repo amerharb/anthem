@@ -5,10 +5,11 @@ export const no: Country = {
 	name: {
 		en: 'Norway',
 		ar: 'النرويج',
+		de: 'Norwegen',
 		el: 'Νορβηγία',
 		sv: 'Norge',
-		tr: 'Norveç',
 		th: 'นอร์เวย์',
+		tr: 'Norveç',
 	},
 	flag: '🇳🇴',
 	nativeLanguage: 'no',

@@ -5,10 +5,11 @@ export const es: Country = {
 	name: {
 		en: 'Spain',
 		ar: 'إسبانيا',
+		de: 'Spanien',
 		el: 'Ισπανία',
 		sv: 'Spanien',
-		tr: 'İspanya',
 		th: 'สเปน',
+		tr: 'İspanya',
 	},
 	flag: '🇪🇸',
 	nativeLanguage: 'es',

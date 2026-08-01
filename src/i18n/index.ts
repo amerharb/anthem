@@ -5,6 +5,7 @@
  */
 import en from './en.json'
 import ar from './ar.json'
+import de from './de.json'
 import el from './el.json'
 import sv from './sv.json'
 import th from './th.json'
@@ -19,13 +20,14 @@ export type Translate = (key: string) => string
 export const UI_LANGUAGES: { code: string, display: string }[] = [
 	{ code: 'en', display: 'English' },
 	{ code: 'ar', display: 'عربي' },
+	{ code: 'de', display: 'Deutsch' },
 	{ code: 'el', display: 'Ελληνικά' },
 	{ code: 'sv', display: 'Svenska' },
 	{ code: 'th', display: 'ไทย' },
 	{ code: 'tr', display: 'Türkçe' },
 ]
 
-const DICTS: Record<string, Partial<Record<string, string>>> = { en, ar, el, sv, th, tr }
+const DICTS: Record<string, Partial<Record<string, string>>> = { en, ar, de, el, sv, th, tr }
 
 // a translate function for the given language, falling back to English
 export function translator(lang: string): Translate {

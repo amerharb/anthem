@@ -5,10 +5,11 @@ export const gb: Country = {
 	name: {
 		en: 'United Kingdom',
 		ar: 'المملكة المتحدة',
+		de: 'Vereinigtes Königreich',
 		el: 'Ηνωμένο Βασίλειο',
 		sv: 'Storbritannien',
-		tr: 'Birleşik Krallık',
 		th: 'สหราชอาณาจักร',
+		tr: 'Birleşik Krallık',
 	},
 	flag: '🇬🇧',
 	nativeLanguage: 'en',

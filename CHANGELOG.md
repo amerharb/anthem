@@ -4,6 +4,9 @@
 
 ## [0.17.0] (unreleased)
 ### Added
+- Add German (Deutsch) as an interface language, bringing the project to the
+  same seven as its sister projects: English, Arabic, German, Greek, Swedish,
+  Thai and Turkish. All 33 country names are translated with it
 - Add 23 more countries from the Flags project (Albania, Austria, Belgium,
   Switzerland, Czech Republic, Germany, Denmark, Egypt, Spain, France, United
   Kingdom, Hungary, Iran, Italy, Luxembourg, Netherlands, Norway, Poland,

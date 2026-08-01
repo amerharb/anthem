@@ -5,10 +5,11 @@ export const al: Country = {
 	name: {
 		en: 'Albania',
 		ar: 'ألبانيا',
+		de: 'Albanien',
 		el: 'Αλβανία',
 		sv: 'Albanien',
-		tr: 'Arnavutluk',
 		th: 'แอลเบเนีย',
+		tr: 'Arnavutluk',
 	},
 	flag: '🇦🇱',
 	nativeLanguage: 'sq',

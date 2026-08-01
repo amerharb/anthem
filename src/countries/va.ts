@@ -5,10 +5,11 @@ export const va: Country = {
 	name: {
 		en: 'Vatican City',
 		ar: 'الفاتيكان',
+		de: 'Vatikanstadt',
 		el: 'Βατικανό',
 		sv: 'Vatikanstaten',
-		tr: 'Vatikan',
 		th: 'นครวาติกัน',
+		tr: 'Vatikan',
 	},
 	flag: '🇻🇦',
 	nativeLanguage: 'la',

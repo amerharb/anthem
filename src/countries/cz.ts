@@ -5,10 +5,11 @@ export const cz: Country = {
 	name: {
 		en: 'Czech Republic',
 		ar: 'التشيك',
+		de: 'Tschechien',
 		el: 'Τσεχία',
 		sv: 'Tjeckien',
-		tr: 'Çekya',
 		th: 'เช็กเกีย',
+		tr: 'Çekya',
 	},
 	flag: '🇨🇿',
 	nativeLanguage: 'cs',

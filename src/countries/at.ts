@@ -5,10 +5,11 @@ export const at: Country = {
 	name: {
 		en: 'Austria',
 		ar: 'النمسا',
+		de: 'Österreich',
 		el: 'Αυστρία',
 		sv: 'Österrike',
-		tr: 'Avusturya',
 		th: 'ออสเตรีย',
+		tr: 'Avusturya',
 	},
 	flag: '🇦🇹',
 	nativeLanguage: 'de',

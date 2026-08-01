@@ -5,10 +5,11 @@ export const hu: Country = {
 	name: {
 		en: 'Hungary',
 		ar: 'المجر',
+		de: 'Ungarn',
 		el: 'Ουγγαρία',
 		sv: 'Ungern',
-		tr: 'Macaristan',
 		th: 'ฮังการี',
+		tr: 'Macaristan',
 	},
 	flag: '🇭🇺',
 	nativeLanguage: 'hu',
