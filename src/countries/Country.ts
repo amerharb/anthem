@@ -2,10 +2,15 @@
 // card when the display mode is "name"), so every country needs all of them.
 export type Language = 'en' | 'ar' | 'el' | 'sv' | 'th' | 'tr'
 
-// The language the anthem itself is sung in (ISO 639-1). Separate from the
-// interface languages above — most anthems are in neither of them. Add a code
-// here as countries are added.
-export type NativeLanguage = 'ar' | 'en' | 'el' | 'sv' | 'th' | 'tr'
+// The language the anthem itself is sung in (ISO 639-1, plus 'la' for Latin).
+// Separate from the interface languages above — most anthems are in neither of
+// them. Add a code here as countries are added. Where a country has several
+// official languages (Belgium, Switzerland, Luxembourg) this is the one the
+// recording is sung in.
+export type NativeLanguage =
+	| 'ar' | 'cs' | 'da' | 'de' | 'el' | 'en' | 'es' | 'fa' | 'fr' | 'hu'
+	| 'it' | 'la' | 'lb' | 'nl' | 'no' | 'pl' | 'pt' | 'sq' | 'sv' | 'th'
+	| 'tr' | 'uk'
 
 export type Country = {
     code: string,

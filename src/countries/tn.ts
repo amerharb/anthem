@@ -1,0 +1,24 @@
+import { Country } from './Country'
+
+export const tn: Country = {
+	code: 'tn',
+	name: {
+		en: 'Tunisia',
+		ar: 'تونس',
+		el: 'Τυνησία',
+		sv: 'Tunisien',
+		tr: 'Tunus',
+		th: 'ตูนิเซีย',
+	},
+	flag: '🇹🇳',
+	nativeLanguage: 'ar',
+	anthem: {
+		nativeName: 'حماة الحمى',
+		name: {
+			en: 'Defenders of the Homeland',
+		},
+	},
+	// added in bulk from the Flags project: the recording is in place, but the
+	// intro point and the 🎼 melody still need doing
+	beta: true,
+}

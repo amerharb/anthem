@@ -1,0 +1,24 @@
+import { Country } from './Country'
+
+export const de: Country = {
+	code: 'de',
+	name: {
+		en: 'Germany',
+		ar: 'ألمانيا',
+		el: 'Γερμανία',
+		sv: 'Tyskland',
+		tr: 'Almanya',
+		th: 'เยอรมนี',
+	},
+	flag: '🇩🇪',
+	nativeLanguage: 'de',
+	anthem: {
+		nativeName: 'Das Lied der Deutschen',
+		name: {
+			en: 'The Song of the Germans',
+		},
+	},
+	// added in bulk from the Flags project: the recording is in place, but the
+	// intro point and the 🎼 melody still need doing
+	beta: true,
+}
