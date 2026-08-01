@@ -4,6 +4,12 @@
 
 ## [0.17.0] (unreleased)
 ### Added
+- Promote Albania 🇦🇱 out of beta, the first of the bulk-added countries to be
+  worked through: its recording is three straight statements of the tune (seams
+  at 10.7 / 21.1 / 41.7 s), so it has no distinct intro, and it now carries its
+  composed and adopted dates. No 🎤 vocal — the only public-domain recording is
+  a 1918 acoustic disc, too rough to ship — and no 🎼 score, the melody derived
+  from the published voice line did not hold up by ear
 - Add Simplified Chinese (简体中文) as an interface language, bringing every
   sister project to the same eight: English, Arabic, German, Greek, Swedish,
   Thai, Turkish and Simplified Chinese

@@ -19,8 +19,9 @@ export const al: Country = {
 		name: {
 			en: 'Hymn to the Flag',
 		},
+		// no intro: the recording is three straight statements of the tune, with
+		// seams at 10.7 / 21.1 / 41.7 s — verse structure, not a fanfare
+		composed: '1880',
+		adopted: '1912-11-28',
 	},
-	// added in bulk from the Flags project: the recording is in place, but the
-	// intro point and the 🎼 melody still need doing
-	beta: true,
 }
