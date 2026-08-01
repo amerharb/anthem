@@ -20,6 +20,9 @@ export const us: Country = {
 			en: 'The Star-Spangled Banner',
 			ar: 'الراية المرصعة بالنجوم',
 		},
+		// solo vocalist with band, U.S. Navy Band (public domain, a work of the
+		// U.S. government) — the same ensemble family as the instrumental
+		hasVocal: true,
 		score: {
 			// Bb major, 3/4, quarter = 100; melody is the top voice of the
 			// public-domain piano MIDI on Wikimedia Commons

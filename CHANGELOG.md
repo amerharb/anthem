@@ -4,6 +4,11 @@
 
 ## [0.17.0] (unreleased)
 ### Added
+- Add the first 🎤 vocal recording: the United States, sung by a solo vocalist
+  with the U.S. Navy Band (public domain as a work of the U.S. government) —
+  the same ensemble family as the instrumental already in place. The 🎤 option
+  had been in the UI with no country behind it; it stays beta while it is the
+  only one
 - Promote Albania 🇦🇱 out of beta, the first of the bulk-added countries to be
   worked through: its recording is three straight statements of the tune (seams
   at 10.7 / 21.1 / 41.7 s), so it has no distinct intro, and it now carries its
