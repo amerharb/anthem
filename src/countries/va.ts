@@ -10,6 +10,7 @@ export const va: Country = {
 		sv: 'Vatikanstaten',
 		th: 'นครวาติกัน',
 		tr: 'Vatikan',
+		zh: '梵蒂冈',
 	},
 	flag: '🇻🇦',
 	nativeLanguage: 'la',

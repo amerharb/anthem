@@ -10,6 +10,7 @@ export const ua: Country = {
 		sv: 'Ukraina',
 		th: 'ยูเครน',
 		tr: 'Ukrayna',
+		zh: '乌克兰',
 	},
 	flag: '🇺🇦',
 	nativeLanguage: 'uk',

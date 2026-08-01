@@ -10,6 +10,7 @@ export const gb: Country = {
 		sv: 'Storbritannien',
 		th: 'สหราชอาณาจักร',
 		tr: 'Birleşik Krallık',
+		zh: '英国',
 	},
 	flag: '🇬🇧',
 	nativeLanguage: 'en',

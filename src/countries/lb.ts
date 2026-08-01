@@ -10,6 +10,7 @@ export const lb: Country = {
 		sv: 'Libanon',
 		th: 'เลบานอน',
 		tr: 'Lübnan',
+		zh: '黎巴嫩',
 	},
 	flag: '🇱🇧',
 	nativeLanguage: 'ar',

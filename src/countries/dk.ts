@@ -10,6 +10,7 @@ export const dk: Country = {
 		sv: 'Danmark',
 		th: 'เดนมาร์ก',
 		tr: 'Danimarka',
+		zh: '丹麦',
 	},
 	flag: '🇩🇰',
 	nativeLanguage: 'da',

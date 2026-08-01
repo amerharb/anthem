@@ -10,6 +10,7 @@ export const hu: Country = {
 		sv: 'Ungern',
 		th: 'ฮังการี',
 		tr: 'Macaristan',
+		zh: '匈牙利',
 	},
 	flag: '🇭🇺',
 	nativeLanguage: 'hu',

@@ -1,6 +1,6 @@
 // the interface languages; they also key each country's display name (shown on a
 // card when the display mode is "name"), so every country needs all of them.
-export type Language = 'en' | 'ar' | 'de' | 'el' | 'sv' | 'th' | 'tr'
+export type Language = 'en' | 'ar' | 'de' | 'el' | 'sv' | 'th' | 'tr' | 'zh'
 
 // The language the anthem itself is sung in (ISO 639-1, plus 'la' for Latin).
 // Separate from the interface languages above — most anthems are in neither of

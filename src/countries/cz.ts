@@ -10,6 +10,7 @@ export const cz: Country = {
 		sv: 'Tjeckien',
 		th: 'เช็กเกีย',
 		tr: 'Çekya',
+		zh: '捷克',
 	},
 	flag: '🇨🇿',
 	nativeLanguage: 'cs',

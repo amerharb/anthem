@@ -10,6 +10,7 @@ export const ir: Country = {
 		sv: 'Iran',
 		th: 'อิหร่าน',
 		tr: 'İran',
+		zh: '伊朗',
 	},
 	flag: '🇮🇷',
 	nativeLanguage: 'fa',

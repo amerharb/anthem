@@ -10,6 +10,7 @@ export const gr: Country = {
 		sv: 'Grekland',
 		th: 'กรีซ',
 		tr: 'Yunanistan',
+		zh: '希腊',
 	},
 	flag: '🇬🇷',
 	nativeLanguage: 'el',

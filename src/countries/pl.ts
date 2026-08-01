@@ -10,6 +10,7 @@ export const pl: Country = {
 		sv: 'Polen',
 		th: 'โปแลนด์',
 		tr: 'Polonya',
+		zh: '波兰',
 	},
 	flag: '🇵🇱',
 	nativeLanguage: 'pl',

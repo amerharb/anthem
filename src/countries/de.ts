@@ -10,6 +10,7 @@ export const de: Country = {
 		sv: 'Tyskland',
 		th: 'เยอรมนี',
 		tr: 'Almanya',
+		zh: '德国',
 	},
 	flag: '🇩🇪',
 	nativeLanguage: 'de',

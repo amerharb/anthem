@@ -10,6 +10,7 @@ export const tr: Country = {
 		sv: 'Turkiet',
 		th: 'ตุรกี',
 		tr: 'Türkiye',
+		zh: '土耳其',
 	},
 	flag: '🇹🇷',
 	nativeLanguage: 'tr',

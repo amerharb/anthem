@@ -10,6 +10,7 @@ export const es: Country = {
 		sv: 'Spanien',
 		th: 'สเปน',
 		tr: 'İspanya',
+		zh: '西班牙',
 	},
 	flag: '🇪🇸',
 	nativeLanguage: 'es',

@@ -10,6 +10,7 @@ export const it: Country = {
 		sv: 'Italien',
 		th: 'อิตาลี',
 		tr: 'İtalya',
+		zh: '意大利',
 	},
 	flag: '🇮🇹',
 	nativeLanguage: 'it',

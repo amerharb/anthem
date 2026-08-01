@@ -10,6 +10,7 @@ export const ae: Country = {
 		sv: 'Förenade Arabemiraten',
 		th: 'สหรัฐอาหรับเอมิเรตส์',
 		tr: 'Birleşik Arap Emirlikleri',
+		zh: '阿拉伯联合酋长国',
 	},
 	flag: '🇦🇪',
 	nativeLanguage: 'ar',

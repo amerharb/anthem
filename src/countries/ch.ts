@@ -10,6 +10,7 @@ export const ch: Country = {
 		sv: 'Schweiz',
 		th: 'สวิตเซอร์แลนด์',
 		tr: 'İsviçre',
+		zh: '瑞士',
 	},
 	flag: '🇨🇭',
 	nativeLanguage: 'de',

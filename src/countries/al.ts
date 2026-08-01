@@ -10,6 +10,7 @@ export const al: Country = {
 		sv: 'Albanien',
 		th: 'แอลเบเนีย',
 		tr: 'Arnavutluk',
+		zh: '阿尔巴尼亚',
 	},
 	flag: '🇦🇱',
 	nativeLanguage: 'sq',

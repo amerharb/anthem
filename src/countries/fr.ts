@@ -10,6 +10,7 @@ export const fr: Country = {
 		sv: 'Frankrike',
 		th: 'ฝรั่งเศส',
 		tr: 'Fransa',
+		zh: '法国',
 	},
 	flag: '🇫🇷',
 	nativeLanguage: 'fr',

@@ -10,6 +10,7 @@ export const pt: Country = {
 		sv: 'Portugal',
 		th: 'โปรตุเกส',
 		tr: 'Portekiz',
+		zh: '葡萄牙',
 	},
 	flag: '🇵🇹',
 	nativeLanguage: 'pt',

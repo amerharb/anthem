@@ -10,6 +10,7 @@ export const eg: Country = {
 		sv: 'Egypten',
 		th: 'อียิปต์',
 		tr: 'Mısır',
+		zh: '埃及',
 	},
 	flag: '🇪🇬',
 	nativeLanguage: 'ar',

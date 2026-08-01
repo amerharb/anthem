@@ -10,6 +10,7 @@ export const no: Country = {
 		sv: 'Norge',
 		th: 'นอร์เวย์',
 		tr: 'Norveç',
+		zh: '挪威',
 	},
 	flag: '🇳🇴',
 	nativeLanguage: 'no',

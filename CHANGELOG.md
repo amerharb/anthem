@@ -4,6 +4,10 @@
 
 ## [0.17.0] (unreleased)
 ### Added
+- Add Simplified Chinese (简体中文) as an interface language, bringing every
+  sister project to the same eight: English, Arabic, German, Greek, Swedish,
+  Thai, Turkish and Simplified Chinese
+  All 33 country names are translated with it
 - Add German (Deutsch) as an interface language, bringing the project to the
   same seven as its sister projects: English, Arabic, German, Greek, Swedish,
   Thai and Turkish. All 33 country names are translated with it

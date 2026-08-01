@@ -10,6 +10,7 @@ export const at: Country = {
 		sv: 'Österrike',
 		th: 'ออสเตรีย',
 		tr: 'Avusturya',
+		zh: '奥地利',
 	},
 	flag: '🇦🇹',
 	nativeLanguage: 'de',

@@ -10,6 +10,7 @@ import el from './el.json'
 import sv from './sv.json'
 import th from './th.json'
 import tr from './tr.json'
+import zh from './zh.json'
 
 export type MsgKey = keyof typeof en
 // accepts any string so the shared presentational components stay decoupled
@@ -25,9 +26,10 @@ export const UI_LANGUAGES: { code: string, display: string }[] = [
 	{ code: 'sv', display: 'Svenska' },
 	{ code: 'th', display: 'ไทย' },
 	{ code: 'tr', display: 'Türkçe' },
+	{ code: 'zh', display: '简体中文' },
 ]
 
-const DICTS: Record<string, Partial<Record<string, string>>> = { en, ar, de, el, sv, th, tr }
+const DICTS: Record<string, Partial<Record<string, string>>> = { en, ar, de, el, sv, th, tr, zh }
 
 // a translate function for the given language, falling back to English
 export function translator(lang: string): Translate {

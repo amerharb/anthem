@@ -10,6 +10,7 @@ export const lu: Country = {
 		sv: 'Luxemburg',
 		th: 'ลักเซมเบิร์ก',
 		tr: 'Lüksemburg',
+		zh: '卢森堡',
 	},
 	flag: '🇱🇺',
 	nativeLanguage: 'lb',

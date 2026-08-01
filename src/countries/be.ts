@@ -10,6 +10,7 @@ export const be: Country = {
 		sv: 'Belgien',
 		th: 'เบลเยียม',
 		tr: 'Belçika',
+		zh: '比利时',
 	},
 	flag: '🇧🇪',
 	nativeLanguage: 'nl',

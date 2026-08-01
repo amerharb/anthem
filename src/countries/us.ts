@@ -10,6 +10,7 @@ export const us: Country = {
 		sv: 'USA',
 		th: 'สหรัฐอเมริกา',
 		tr: 'Amerika Birleşik Devletleri',
+		zh: '美国',
 	},
 	flag: '🇺🇸',
 	nativeLanguage: 'en',
