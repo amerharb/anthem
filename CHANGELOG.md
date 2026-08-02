@@ -4,6 +4,16 @@
 
 ## [0.17.0] (unreleased)
 ### Added
+- Promote Belgium 🇧🇪 out of beta, with a 4.4 s drum-roll intro (unpitched until
+  ~4.1 s, when the band enters) and a 🎼 melody from the monophonic `trumpet(s)`
+  line of a BitMidi band arrangement. Its pitch classes match the published
+  voice line, which is how the notes were checked. Kept in the anthem's written
+  B♭ rather than transposed to the recording's F. No 🎤 vocal: the three sung
+  versions on Commons (French, Dutch, Walloon) are CC BY, and the project stays
+  public-domain-only
+### Changed
+- Take the 🎼 Notes option out of beta — it now shows in production, where 10 of
+  the 13 countries have a score behind it
 - Promote Austria 🇦🇹 out of beta, with a 4.4 s intro (a quiet sustained tone,
   then 1.2 s of silence before the anthem enters) and a 🎼 melody taken from the
   CC0 four-voice MIDI on Wikimedia Commons — the first score derived from a
