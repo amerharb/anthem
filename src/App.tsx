@@ -70,7 +70,7 @@ export type MusicType = 'instrument' | 'vocal' | 'notes' | 'intro' | 'introInstr
 const MUSIC_TYPE_DEFS: { type: MusicType, icon: string, key: string, beta?: boolean }[] = [
 	{ type: 'instrument', icon: '🎺', key: 'music.instrument' },
 	{ type: 'vocal', icon: '🎤', key: 'music.vocal', beta: true },
-	{ type: 'notes', icon: '🎼', key: 'music.notes', beta: true },
+	{ type: 'notes', icon: '🎼', key: 'music.notes' },
 	{ type: 'intro', icon: '🥁', key: 'music.intro' },
 	{ type: 'introInstrument', icon: '🥁🎺', key: 'music.introInstrument' },
 ]
