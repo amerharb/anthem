@@ -19,6 +19,8 @@ export const at: Country = {
 		name: {
 			en: 'Land of Mountains, Land by the River',
 		},
+		// Preradović died in 1951, so the words are public domain
+		lyrics: ['de'],
 		// a quiet sustained tone, then 1.2 s of silence before the anthem enters
 		intro: 4.4,
 		score: {
