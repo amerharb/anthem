@@ -2,7 +2,11 @@
 
 <!-- https://keepachangelog.com/en/1.0.0/ -->
 
-## [0.17.0] (unreleased)
+## [0.17.0] 2026-08-03
+### Fixed
+- Correct the README: regenerate the country list from the data (14 live, 19
+  beta), rename 🎤 to Solo vocal, list all eight interface languages, and
+  document `public/lyrics/` and `tools/fetch-lyrics.py`
 ### Added
 - Promote Switzerland 🇨🇭 out of beta, with no intro (pitched music starts at
   full volume; the 0.5 s dip at 5.4 s is smaller than the later phrase breaks),
