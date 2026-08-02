@@ -32,6 +32,13 @@ export type Country = {
 			// the melody as notes, synthesized live in the browser instead of
 			// streaming a recording (see src/synth.ts for the format)
 			score?: { tempo: number, melody: string },
+			// which languages the anthem's words are on file in. The text itself
+			// lives outside the bundle, one file per language, at
+			// `public/lyrics/<code>/<language>.txt` — the same shape as the sound
+			// folders. A country with more than one official version (Belgium,
+			// Switzerland) lists each. Only lyrics old enough to be public domain
+			// are carried; several anthems in this project are still in copyright.
+			lyrics?: NativeLanguage[],
 			composed?: string, // ISO date 'yyyy-mm-dd', 'yyyy-mm' or 'yyyy'
 			adopted?: string, // ISO date 'yyyy-mm-dd', 'yyyy-mm' or 'yyyy' some countries have no adoption day
 		},
