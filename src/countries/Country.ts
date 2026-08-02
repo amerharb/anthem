@@ -1,11 +1,16 @@
 // the interface languages; they also key each country's display name (shown on a
 // card when the display mode is "name"), so every country needs all of them.
-export type Language = 'en' | 'ar' | 'el' | 'sv' | 'th' | 'tr'
+export type Language = 'en' | 'ar' | 'de' | 'el' | 'sv' | 'th' | 'tr' | 'zh'
 
-// The language the anthem itself is sung in (ISO 639-1). Separate from the
-// interface languages above — most anthems are in neither of them. Add a code
-// here as countries are added.
-export type NativeLanguage = 'ar' | 'en' | 'el' | 'sv' | 'th' | 'tr'
+// The language the anthem itself is sung in (ISO 639-1, plus 'la' for Latin).
+// Separate from the interface languages above — most anthems are in neither of
+// them. Add a code here as countries are added. Where a country has several
+// official languages (Belgium, Switzerland, Luxembourg) this is the one the
+// recording is sung in.
+export type NativeLanguage =
+	| 'ar' | 'cs' | 'da' | 'de' | 'el' | 'en' | 'es' | 'fa' | 'fr' | 'hu'
+	| 'it' | 'la' | 'lb' | 'nl' | 'no' | 'pl' | 'pt' | 'sq' | 'sv' | 'th'
+	| 'tr' | 'uk'
 
 export type Country = {
     code: string,
@@ -27,6 +32,13 @@ export type Country = {
 			// the melody as notes, synthesized live in the browser instead of
 			// streaming a recording (see src/synth.ts for the format)
 			score?: { tempo: number, melody: string },
+			// which languages the anthem's words are on file in. The text itself
+			// lives outside the bundle, one file per language, at
+			// `public/lyrics/<code>/<language>.txt` — the same shape as the sound
+			// folders. A country with more than one official version (Belgium,
+			// Switzerland) lists each. Only lyrics old enough to be public domain
+			// are carried; several anthems in this project are still in copyright.
+			lyrics?: NativeLanguage[],
 			composed?: string, // ISO date 'yyyy-mm-dd', 'yyyy-mm' or 'yyyy'
 			adopted?: string, // ISO date 'yyyy-mm-dd', 'yyyy-mm' or 'yyyy' some countries have no adoption day
 		},

@@ -28,6 +28,29 @@ import { th } from './countries/th'
 import { tr } from './countries/tr'
 import { gr } from './countries/gr'
 import { se } from './countries/se'
+import { al } from './countries/al'
+import { at } from './countries/at'
+import { be } from './countries/be'
+import { ch } from './countries/ch'
+import { cz } from './countries/cz'
+import { de } from './countries/de'
+import { dk } from './countries/dk'
+import { eg } from './countries/eg'
+import { es } from './countries/es'
+import { fr } from './countries/fr'
+import { gb } from './countries/gb'
+import { hu } from './countries/hu'
+import { ir } from './countries/ir'
+import { it } from './countries/it'
+import { lu } from './countries/lu'
+import { nl } from './countries/nl'
+import { no } from './countries/no'
+import { pl } from './countries/pl'
+import { ps } from './countries/ps'
+import { pt } from './countries/pt'
+import { tn } from './countries/tn'
+import { ua } from './countries/ua'
+import { va } from './countries/va'
 
 // Fisher–Yates shuffle into a new array (used to scramble the card positions on game start)
 function shuffle<T>(items: T[]): T[] {
@@ -46,8 +69,10 @@ function shuffle<T>(items: T[]): T[] {
 export type MusicType = 'instrument' | 'vocal' | 'notes' | 'intro' | 'introInstrument'
 const MUSIC_TYPE_DEFS: { type: MusicType, icon: string, key: string, beta?: boolean }[] = [
 	{ type: 'instrument', icon: '🎺', key: 'music.instrument' },
+	// 'vocal' means a solo vocalist; choral and other kinds get their own
+	// types later, so the id stays generic until that split happens
 	{ type: 'vocal', icon: '🎤', key: 'music.vocal', beta: true },
-	{ type: 'notes', icon: '🎼', key: 'music.notes', beta: true },
+	{ type: 'notes', icon: '🎼', key: 'music.notes' },
 	{ type: 'intro', icon: '🥁', key: 'music.intro' },
 	{ type: 'introInstrument', icon: '🥁🎺', key: 'music.introInstrument' },
 ]
@@ -82,7 +107,7 @@ function clipFor(c: Country, type: MusicType): Clip {
 
 function App() {
 	// everything the build supports (after the beta feature flag)
-	const ALL_COUNTRIES: Country[] = [sy, iq, lb, ae, om, us, th, tr, gr, se].filter(isVisible)
+	const ALL_COUNTRIES: Country[] = [sy, iq, lb, ae, om, us, th, tr, gr, se, al, at, be, ch, cz, de, dk, eg, es, fr, gb, hu, ir, it, lu, nl, no, pl, ps, pt, tn, ua, va].filter(isVisible)
 
 	// true while flight-mode downloads are in progress, to show it on the toggle
 	const [caching, setCaching] = useState(false)
@@ -209,6 +234,8 @@ function App() {
 			refreshCacheCount()
 		},
 		audio,
+		// a round is labelled by the anthem type it was played in
+		mode: musicType,
 		onRoundStart: () => setShownName(''),
 	})
 
@@ -312,8 +339,7 @@ function App() {
 						preparing={game.preparing}
 						onReplay={game.replay}
 						onGiveUp={game.giveUp}
-						onStop={game.stopRound}
-						onRestart={game.startRound}
+						onToggleRound={game.toggleRound}
 					/>
 				)}
 			</header>

@@ -18,7 +18,14 @@ where it came from.
 | `th.midi` | เพลงชาติไทย | BitMidi `/uploads/79481.mid` | `MELODY` track; anthem unchanged since 1939 |
 | `tr.midi` | İstiklal Marşı | BitMidi `/uploads/79483.mid` | `MELODY` track; anthem dates from 1921 |
 | `gr.midi` | Ύμνος εις την Ελευθερίαν | BitMidi `/uploads/79430.mid` | `MELODY` track, transposed down an octave (source is in the piccolo register) |
+| `at.midi` | Land der Berge, Land am Strome | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Land_der_Berge,_Land_am_Strome.mid) — **CC0** | four-voice setting by Rabanus Flavus; melody is track 1's soprano (highest note per onset — it doubles into octaves late). Arranged in D, transposed up a minor third to F |
+| `be.midi` | La Brabançonne | BitMidi `/uploads/16903.mid` | no `MELODY` track — the melody is the monophonic `trumpet(s)` line, like Sweden. Its pitch classes (Bb C D Eb F G A) match the published voice line, which is how the notes were checked |
+| `ch.midi` | Schweizerpsalm | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Trittst_im_Morgenrot_daher.mid) — **public domain** | four voices; track 1 is already monophonic (152 notes, no chords). Arranged in A, transposed down a tritone to the recording's Eb |
 | `se.midi` | Du gamla, du fria | BitMidi `/uploads/79476.mid` | no `MELODY` track — the melody is the monophonic `trumpet(s)` line |
+
+`at.midi`, `ch.midi` and `us.midi` are the ones that do not come from BitMidi; `at.midi`
+is a CC0 dedication and `ch.midi` is public domain, so unlike the others they
+are safe to redistribute.
 
 All the BitMidi files above come from the same Software Toolworks *World
 Atlas* (1991) collection. Always check what the anthem **was in 1991** before

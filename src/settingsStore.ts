@@ -37,7 +37,7 @@ export const DEFAULT_SETTINGS: Settings = {
 const STORAGE_KEY = 'anthem:settings'
 
 // the interface languages we have translations for
-const UI_LANGUAGE_CODES: Language[] = ['en', 'ar', 'el', 'sv', 'th', 'tr']
+const UI_LANGUAGE_CODES: Language[] = ['en', 'ar', 'de', 'el', 'sv', 'th', 'tr', 'zh']
 
 // map a BCP-47 tag (e.g. "en-US", "ar") to a supported UI language, or null
 function tagToCode(tag: string, set: readonly Language[]): Language | null {

@@ -5,10 +5,12 @@ export const ae: Country = {
 	name: {
 		en: 'United Arab Emirates',
 		ar: 'الإمارات العربية المتحدة',
+		de: 'Vereinigte Arabische Emirate',
 		el: 'Ηνωμένα Αραβικά Εμιράτα',
 		sv: 'Förenade Arabemiraten',
-		tr: 'Birleşik Arap Emirlikleri',
 		th: 'สหรัฐอาหรับเอมิเรตส์',
+		tr: 'Birleşik Arap Emirlikleri',
+		zh: '阿拉伯联合酋长国',
 	},
 	flag: '🇦🇪',
 	nativeLanguage: 'ar',

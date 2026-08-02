@@ -5,10 +5,12 @@ export const us: Country = {
 	name: {
 		en: 'United States of America',
 		ar: 'الولايات المتحدة الأمريكية',
+		de: 'Vereinigte Staaten von Amerika',
 		el: 'Ηνωμένες Πολιτείες Αμερικής',
 		sv: 'USA',
-		tr: 'Amerika Birleşik Devletleri',
 		th: 'สหรัฐอเมริกา',
+		tr: 'Amerika Birleşik Devletleri',
+		zh: '美国',
 	},
 	flag: '🇺🇸',
 	nativeLanguage: 'en',
@@ -18,6 +20,9 @@ export const us: Country = {
 			en: 'The Star-Spangled Banner',
 			ar: 'الراية المرصعة بالنجوم',
 		},
+		// solo vocalist with band, U.S. Navy Band (public domain, a work of the
+		// U.S. government) — the same ensemble family as the instrumental
+		hasVocal: true,
 		score: {
 			// Bb major, 3/4, quarter = 100; melody is the top voice of the
 			// public-domain piano MIDI on Wikimedia Commons

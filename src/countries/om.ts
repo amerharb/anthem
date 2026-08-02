@@ -5,10 +5,12 @@ export const om: Country = {
 	name: {
 		en: 'Oman',
 		ar: 'عُمان',
+		de: 'Oman',
 		el: 'Ομάν',
 		sv: 'Oman',
-		tr: 'Umman',
 		th: 'โอมาน',
+		tr: 'Umman',
+		zh: '阿曼',
 	},
 	flag: '🇴🇲',
 	nativeLanguage: 'ar',
