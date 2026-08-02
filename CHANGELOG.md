@@ -4,6 +4,14 @@
 
 ## [0.17.0] (unreleased)
 ### Added
+- Promote Austria 🇦🇹 out of beta, with a 4.4 s intro (a quiet sustained tone,
+  then 1.2 s of silence before the anthem enters) and a 🎼 melody taken from the
+  CC0 four-voice MIDI on Wikimedia Commons — the first score derived from a
+  freely-licensed MIDI rather than a scan. The arrangement is in D and the
+  recording in F, so it is transposed up a minor third; the tempo (63) is
+  measured from the recording's phrases, not the MIDI's own 110. No 🎤 vocal:
+  all four Austrian recordings on Commons are instrumental, though the lyrics
+  themselves entered the public domain in 2022
 - Add the first 🎤 vocal recording: the United States, sung by a solo vocalist
   with the U.S. Navy Band (public domain as a work of the U.S. government) —
   the same ensemble family as the instrumental already in place. The 🎤 option
