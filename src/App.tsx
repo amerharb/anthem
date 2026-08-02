@@ -69,6 +69,8 @@ function shuffle<T>(items: T[]): T[] {
 export type MusicType = 'instrument' | 'vocal' | 'notes' | 'intro' | 'introInstrument'
 const MUSIC_TYPE_DEFS: { type: MusicType, icon: string, key: string, beta?: boolean }[] = [
 	{ type: 'instrument', icon: '🎺', key: 'music.instrument' },
+	// 'vocal' means a solo vocalist; choral and other kinds get their own
+	// types later, so the id stays generic until that split happens
 	{ type: 'vocal', icon: '🎤', key: 'music.vocal', beta: true },
 	{ type: 'notes', icon: '🎼', key: 'music.notes' },
 	{ type: 'intro', icon: '🥁', key: 'music.intro' },

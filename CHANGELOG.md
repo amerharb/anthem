@@ -4,6 +4,13 @@
 
 ## [0.17.0] (unreleased)
 ### Added
+- Promote Switzerland 🇨🇭 out of beta, with no intro (pitched music starts at
+  full volume; the 0.5 s dip at 5.4 s is smaller than the later phrase breaks),
+  a 🎼 melody from the public-domain four-voice MIDI on Wikimedia Commons, and
+  a 🎤 vocal from the public-domain official recording. The MIDI is arranged in
+  A and the recording is in E♭ — a tritone apart — so the melody is transposed
+  down. The vocal source runs 394 s, so it is cut at the 90.1 s section break
+  to sit alongside the 84 s instrumental
 - Promote Belgium 🇧🇪 out of beta, with a 4.4 s drum-roll intro (unpitched until
   ~4.1 s, when the band enters) and a 🎼 melody from the monophonic `trumpet(s)`
   line of a BitMidi band arrangement. Its pitch classes match the published
@@ -12,6 +19,10 @@
   versions on Commons (French, Dutch, Walloon) are CC BY, and the project stays
   public-domain-only
 ### Changed
+- Rename the 🎤 option from "Vocal" to "Solo vocal" in all eight interface
+  languages: both recordings so far (US, Switzerland) are solo vocalists, and
+  choral and other kinds will get their own types later. The internal type id
+  stays `vocal` until that split happens
 - Take the 🎼 Notes option out of beta — it now shows in production, where 10 of
   the 13 countries have a score behind it
 - Promote Austria 🇦🇹 out of beta, with a 4.4 s intro (a quiet sustained tone,
