@@ -19,6 +19,8 @@ export const de: Country = {
 		name: {
 			en: 'The Song of the Germans',
 		},
+		// Hoffmann von Fallersleben died in 1874, so the words are public domain
+		lyrics: ['de'],
 	},
 	// added in bulk from the Flags project: the recording is in place, but the
 	// intro point and the 🎼 melody still need doing
