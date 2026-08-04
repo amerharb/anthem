@@ -1,4 +1,14 @@
-[![Version](https://img.shields.io/badge/version-0.17.0-blue.svg)](https://github.com/amerharb/anthem)
+> [!IMPORTANT]
+> **This repository has moved.**
+>
+> Anthem now lives in the [**sawt**](https://github.com/amerharb/sawt)
+> monorepo, at [`apps/anthem`](https://github.com/amerharb/sawt/tree/main/apps/anthem),
+> alongside its four sister apps and a shared landing page.
+>
+> This repository is archived and read-only. It keeps the history up to the
+> move; everything after it happens in `sawt`.
+
+[![Version](https://img.shields.io/badge/version-0.18.0-blue.svg)](https://github.com/amerharb/anthem)
 # Anthem
 
 Small React project to play national anthems and guess the country. Pick an
@@ -82,7 +92,7 @@ The visible countries can be set from the URL, for a shareable view:
   played and you tap the matching card (👍 correct, 👎 wrong). Stuck? The give-up
   button (🤷‍♂️) reveals it (tracked separately from mistakes). It runs through
   every visible country, with your progress (played, mistakes, give-ups, time)
-  shown live in the app bar. ✋ stops a round early, 🔄 starts a fresh one, and
+  shown live in the app bar. ⏹️ stops a round that is running and ▶️ starts the next, and
   pressing 🕹️ again leaves game mode. Needs at least one country visible.
 - First visit: the interface language comes from your browser's language settings.
 
